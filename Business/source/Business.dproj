@@ -1,0 +1,294 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{17192ce4-e83c-4d4f-812c-45058998befb}</ProjectGuid>
+			<MainSource>Business.dpr</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>C:\BLS Business Test\Business.exe</DCC_DependencyCheckOutputName>
+			<ProjectVersion>12.2</ProjectVersion>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<Version>7.0</Version>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_MapFile>3</DCC_MapFile>
+			<DCC_ExeOutput>R:\Prosjekt Regnskap\Program</DCC_ExeOutput>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<Version>7.0</Version>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_MapFile>3</DCC_MapFile>
+			<DCC_ExeOutput>C:\BLS Business Test</DCC_ExeOutput>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters/>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">5</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">183</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1044</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">Bjørn Larsen Software</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">BLS Business</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.5.0.183</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename">Business.exe</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">BLS Business</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">Business.dpr</Source>
+					</Source>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<ItemGroup>
+			<DelphiCompile Include="Business.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="rsMeny.pas">
+				<Form>frmCRM</Form>
+			</DCCReference>
+			<DCCReference Include="rsData.pas">
+				<Form>Dm</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="rsLogin.pas">
+				<Form>frmLogin</Form>
+			</DCCReference>
+			<DCCReference Include="rsPostImport.pas">
+				<Form>frmPostImport</Form>
+			</DCCReference>
+			<DCCReference Include="rsPostnr.pas">
+				<Form>frmPostnr</Form>
+			</DCCReference>
+			<DCCReference Include="rsWebFirmaInfo.pas">
+				<Form>frmWebFirmaInfo</Form>
+			</DCCReference>
+			<DCCReference Include="rsLeverandor.pas">
+				<Form>frmLeverandor</Form>
+			</DCCReference>
+			<DCCReference Include="rsRapport.pas">
+				<Form>frmRapport</Form>
+			</DCCReference>
+			<DCCReference Include="rsKunde.pas">
+				<Form>frmKunde</Form>
+			</DCCReference>
+			<DCCReference Include="rsPostnrInfo.pas">
+				<Form>frmPostnrInfo</Form>
+			</DCCReference>
+			<DCCReference Include="rsProdukt.pas">
+				<Form>frmProdukt</Form>
+			</DCCReference>
+			<DCCReference Include="rsPostnrReg.pas">
+				<Form>frmPostnrReg</Form>
+			</DCCReference>
+			<DCCReference Include="rsImpProd.pas">
+				<Form>frmImportProd</Form>
+			</DCCReference>
+			<DCCReference Include="rsKontoListe.pas">
+				<Form>frmKontoListe</Form>
+			</DCCReference>
+			<DCCReference Include="rsKonto.pas">
+				<Form>frmKonto</Form>
+			</DCCReference>
+			<DCCReference Include="rsFaktura.pas">
+				<Form>frmFaktura</Form>
+			</DCCReference>
+			<DCCReference Include="rsKundeSok.pas">
+				<Form>frmKundeSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsProduktSok.pas">
+				<Form>frmProduktSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsPrint.pas">
+				<Form>frmPrint</Form>
+			</DCCReference>
+			<DCCReference Include="rsFakturaTekst.pas">
+				<Form>frmFakturaTekst</Form>
+			</DCCReference>
+			<DCCReference Include="rsVelgKategori.pas">
+				<Form>frmVelgKat</Form>
+			</DCCReference>
+			<DCCReference Include="rsEndreOrdrenr.pas">
+				<Form>frmEndreOrdrenr</Form>
+			</DCCReference>
+			<DCCReference Include="rsKlient.pas">
+				<Form>frmKlient</Form>
+			</DCCReference>
+			<DCCReference Include="rsBetalt.pas">
+				<Form>frmBetalt</Form>
+			</DCCReference>
+			<DCCReference Include="rsInnbetalinger.pas">
+				<Form>frmInnbetalinger</Form>
+			</DCCReference>
+			<DCCReference Include="rsPurring.pas">
+				<Form>frmPurring</Form>
+			</DCCReference>
+			<DCCReference Include="rsFakturaStatus.pas">
+				<Form>frmFakturaStatus</Form>
+			</DCCReference>
+			<DCCReference Include="rsPrisHistorikk.pas">
+				<Form>frmPrisHistorikk</Form>
+			</DCCReference>
+			<DCCReference Include="rsInnstillinger.pas">
+				<Form>frmInnstillinger</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilag.pas">
+				<Form>frmBilag</Form>
+			</DCCReference>
+			<DCCReference Include="rsFakturaSort.pas">
+				<Form>frmFakturaSort</Form>
+			</DCCReference>
+			<DCCReference Include="rsEksport.pas">
+				<Form>frmEksport</Form>
+			</DCCReference>
+			<DCCReference Include="rsSalgstall.pas">
+				<Form>frmSalgstall</Form>
+			</DCCReference>
+			<DCCReference Include="rsFakturaSok.pas">
+				<Form>frmFakturaSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagTekst.pas">
+				<Form>frmBilagTekst</Form>
+			</DCCReference>
+			<DCCReference Include="rsFunction.pas">
+				<Form>dmFunction</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="rsKontoSok.pas">
+				<Form>frmKontoSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagKontoSok.pas">
+				<Form>frmBilagKontoSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsAbout.pas">
+				<Form>frmAbout</Form>
+			</DCCReference>
+			<DCCReference Include="rsEndreBilagnr.pas">
+				<Form>frmEndreBilagnr</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagNyKonto.pas">
+				<Form>frmBilagNyKonto</Form>
+			</DCCReference>
+			<DCCReference Include="rsMvaSok.pas">
+				<Form>frmMvaSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsMvaPeriode.pas">
+				<Form>frmMvaPeriode</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagAutoGen.pas">
+				<Form>frmBilagAutoGen</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagKreditDialog.pas">
+				<Form>frmBilagKreditDialog</Form>
+			</DCCReference>
+			<DCCReference Include="rsOrdre.pas">
+				<Form>frmOrdre</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagSok.pas">
+				<Form>frmBilagSok</Form>
+			</DCCReference>
+			<DCCReference Include="rsKundeBrReg.pas">
+				<Form>frmKundeBrReg</Form>
+			</DCCReference>
+			<DCCReference Include="rsPreview.pas">
+				<Form>frmPreview</Form>
+			</DCCReference>
+			<DCCReference Include="rsKontoOppslag.pas">
+				<Form>frmKontoOppslag</Form>
+			</DCCReference>
+			<DCCReference Include="rsFakturaRef.pas">
+				<Form>frmFakturaRef</Form>
+			</DCCReference>
+			<DCCReference Include="rsKontaktGruppe.pas">
+				<Form>frmKontaktGruppe</Form>
+			</DCCReference>
+			<DCCReference Include="rsAbonnement.pas">
+				<Form>frmAbonnement</Form>
+			</DCCReference>
+			<DCCReference Include="rsAboGenerering.pas">
+				<Form>frmAboGenerering</Form>
+			</DCCReference>
+			<DCCReference Include="rsLisens.pas">
+				<Form>frmLisens</Form>
+			</DCCReference>
+			<DCCReference Include="rsPeriode.pas">
+				<Form>frmPeriode</Form>
+			</DCCReference>
+			<DCCReference Include="rsEndreFakturanr.pas">
+				<Form>frmEndreFakturanr</Form>
+			</DCCReference>
+			<DCCReference Include="rsAboHistorikk.pas">
+				<Form>frmAboHistorikk</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagSerier.pas">
+				<Form>frmBilagSerier</Form>
+			</DCCReference>
+			<DCCReference Include="rsBilagSerierSymbol.pas">
+				<Form>frmBilagSerieSymbol</Form>
+			</DCCReference>
+			<DCCReference Include="rsException.pas">
+				<Form>frmExceptionDialog</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+	</Project>
