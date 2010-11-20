@@ -157,7 +157,7 @@ object frmService: TfrmService
       Height = 21
       DataField = 'KMSTAND'
       DataSource = dsService
-      TabOrder = 2
+      TabOrder = 4
     end
     object DBEdit3: TDBEdit
       Left = 132
@@ -175,7 +175,7 @@ object frmService: TfrmService
       Height = 21
       Date = 40495.768774375000000000
       Time = 40495.768774375000000000
-      TabOrder = 4
+      TabOrder = 2
       DropDownDate = 40495.000000000000000000
       DataField = 'DATO'
       DataSource = dsService

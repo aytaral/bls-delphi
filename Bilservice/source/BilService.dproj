@@ -5,7 +5,7 @@
 			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
 			<DCC_DependencyCheckOutputName>\\Hp530\DOCS\BLS Transport\BLS Bilservice\BilService.exe</DCC_DependencyCheckOutputName>
-			<ProjectVersion>12.2</ProjectVersion>
+			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
@@ -42,7 +42,7 @@
 			<DCC_WriteableConstants>True</DCC_WriteableConstants>
 			<DCC_MapFile>3</DCC_MapFile>
 			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-			<DCC_ExeOutput>\\Hp530\DOCS\BLS Transport\BLS Bilservice</DCC_ExeOutput>
+			<DCC_ExeOutput>D:\Bls\Transport\Bilservice\</DCC_ExeOutput>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
@@ -50,14 +50,11 @@
 			<BorlandProject>
 				<Delphi.Personality>
 					<Parameters/>
-					<Language>
-						<Language Name="RootDir">D:\XE Projects\Bilservice\source\</Language>
-					</Language>
 					<VersionInfo>
 						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
-						<VersionInfo Name="MajorVer">1</VersionInfo>
-						<VersionInfo Name="MinorVer">5</VersionInfo>
+						<VersionInfo Name="MajorVer">2</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
 						<VersionInfo Name="Build">23</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
@@ -71,7 +68,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Bjørn Larsen Software</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">BLS Bilservice</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.5.0.23</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">2.0.0.23</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName"/>
 						<VersionInfoKeys Name="LegalCopyright"/>
 						<VersionInfoKeys Name="LegalTrademarks"/>
@@ -138,5 +135,5 @@
 			</BuildConfiguration>
 		</ItemGroup>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
-		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 	</Project>

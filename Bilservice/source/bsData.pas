@@ -180,7 +180,7 @@ procedure TdmData.DataModuleCreate(Sender: TObject);
 begin
   //Sjekker at den ikke connecter til databasen før settingene er lest.
   CalledCreate := True;
-  blsRegistry.RegisterApplication;
+  //blsRegistry.RegisterApplication;  //Krever admin tilgang..
   NullStillGlobaler;
 
   g_ReportDir := Dir + 'Reports\';

@@ -2,8 +2,8 @@ object frmPreview: TfrmPreview
   Left = 311
   Top = 159
   Caption = 'Forh'#229'ndsvisning'
-  ClientHeight = 681
-  ClientWidth = 972
+  ClientHeight = 485
+  ClientWidth = 929
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -435,32 +435,33 @@ object frmPreview: TfrmPreview
   object frPreview: TfrxPreview
     Left = 0
     Top = 26
-    Width = 972
-    Height = 633
+    Width = 929
+    Height = 437
     Align = alClient
     OutlineVisible = False
     OutlineWidth = 120
     PopupMenu = TBXPopupMenu1
     ThumbnailVisible = True
     OnPageChanged = frPreviewPageChanged
-    ExplicitWidth = 730
+    UseReportHints = True
+    ExplicitWidth = 740
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 972
+    Width = 929
     Height = 26
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 730
+    ExplicitWidth = 740
     object TBXDock1: TTBXDock
       Left = 0
       Top = 0
-      Width = 972
+      Width = 929
       Height = 26
-      ExplicitWidth = 730
+      ExplicitWidth = 740
       object TBXToolbar1: TTBXToolbar
         Left = 0
         Top = 0
@@ -534,8 +535,8 @@ object frmPreview: TfrmPreview
   end
   object sbStatus: TTBXStatusBar
     Left = 0
-    Top = 659
-    Width = 972
+    Top = 463
+    Width = 929
     Panels = <
       item
         Size = 150
@@ -546,7 +547,7 @@ object frmPreview: TfrmPreview
         Tag = 0
       end>
     UseSystemFont = False
-    ExplicitWidth = 730
+    ExplicitWidth = 740
   end
   object TBXPopupMenu1: TTBXPopupMenu
     Images = Img
@@ -760,7 +761,7 @@ object frmPreview: TfrmPreview
     Left = 48
     Top = 88
     Bitmap = {
-      494C010110001300040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101100013000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1434,12 +1435,18 @@ object frmPreview: TfrmPreview
     OverwritePrompt = False
     PrintOptimized = False
     Outline = False
+    Background = False
+    HTMLTags = True
     Author = 'BLS'
     Subject = 'PDF export'
-    Background = False
     Creator = 'BLS'
-    HTMLTags = True
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
     Left = 16
     Top = 128
   end
@@ -1452,6 +1459,7 @@ object frmPreview: TfrmPreview
     Background = False
     Centered = False
     EmptyLines = True
+    Print = False
     Left = 112
     Top = 128
   end
@@ -1460,10 +1468,12 @@ object frmPreview: TfrmPreview
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    ExportEMF = True
     Wysiwyg = True
     Creator = 'BLS'
     SuppressPageHeadersFooters = False
     HeaderFooterMode = hfText
+    AutoSize = False
     Left = 48
     Top = 128
   end
@@ -1472,6 +1482,7 @@ object frmPreview: TfrmPreview
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    ExportEMF = True
     AsText = False
     Background = True
     FastExport = True
@@ -1502,6 +1513,7 @@ object frmPreview: TfrmPreview
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    ExportEMF = True
     Background = True
     Creator = 'BLS'
     EmptyLines = True
@@ -1514,6 +1526,7 @@ object frmPreview: TfrmPreview
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    ExportEMF = True
     Background = True
     Creator = 'BLS'
     EmptyLines = True

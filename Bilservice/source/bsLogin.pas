@@ -43,7 +43,8 @@ var
 
 implementation
 
-uses blsMD5, bsData, blsDialogs, IniFiles, blsFileUtil, JclStrings, blsRegistry;
+uses blsMD5, bsData, blsDialogs, IniFiles, blsFileUtil, JclStrings,
+  blsRegistry{, blsCrypto};
 
 {$R *.dfm}
 
@@ -105,7 +106,7 @@ begin
   dmData.Connect;
   cdsUsers.Open;
   if cdsUsers.Locate('Brukernavn', editBruker.Text, [loCaseInsensitive]) then begin
-    if MD5(AnsiUpperCase(EditPassord.Text)) = cdsUsersPassord.Value then
+    if MD5(AnsiUpperCase(EditPassord.Text), False) = cdsUsersPassord.Value then
       OK := True
     else
       Str := 'Feil passord. Vennligst prøv igjen!';

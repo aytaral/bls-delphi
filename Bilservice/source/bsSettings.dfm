@@ -26,8 +26,6 @@ object frmSettings: TfrmSettings
     TabOrder = 0
     object tsBiltype: TTabSheet
       Caption = 'Biltyper'
-      ExplicitLeft = 0
-      ExplicitTop = 28
       object blsBorderPanel1: TblsBorderPanel
         Left = 0
         Top = 0
@@ -37,10 +35,6 @@ object frmSettings: TfrmSettings
         BorderWidth = 5
         Caption = 'blsBorderPanel1'
         TabOrder = 0
-        ExplicitLeft = 96
-        ExplicitTop = 160
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object JvDBGrid1: TJvDBGrid
           Left = 6
           Top = 6
@@ -48,7 +42,7 @@ object frmSettings: TfrmSettings
           Height = 249
           Align = alClient
           DataSource = dmData.dsBilType
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           PopupMenu = popGrid
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -78,8 +72,6 @@ object frmSettings: TfrmSettings
     object tsServicetype: TTabSheet
       Caption = 'Servicetyper'
       ImageIndex = 1
-      ExplicitWidth = 281
-      ExplicitHeight = 165
       object blsBorderPanel2: TblsBorderPanel
         Left = 0
         Top = 0
@@ -89,10 +81,6 @@ object frmSettings: TfrmSettings
         BorderWidth = 6
         Caption = 'blsBorderPanel1'
         TabOrder = 0
-        ExplicitLeft = 96
-        ExplicitTop = 160
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object JvDBGrid2: TJvDBGrid
           Left = 7
           Top = 7
@@ -100,7 +88,7 @@ object frmSettings: TfrmSettings
           Height = 247
           Align = alClient
           DataSource = dmData.dsServiceType
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           PopupMenu = popGrid
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
