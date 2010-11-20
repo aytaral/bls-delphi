@@ -135,18 +135,18 @@ object frmKmstand: TfrmKmstand
       Width = 129
       Height = 21
       Alignment = taRightJustify
-      TabOrder = 0
+      TabOrder = 1
       Text = '0'
       EditType = etInteger
     end
     object dtDato: TDateTimePicker
       Left = 16
       Top = 40
-      Width = 97
+      Width = 137
       Height = 21
       Date = 40495.767833506940000000
       Time = 40495.767833506940000000
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   object adoKm: TADODataSet
