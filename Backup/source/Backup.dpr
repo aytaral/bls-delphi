@@ -4,7 +4,8 @@ uses
   JclAppInst,
   Forms,
   dbBackup in 'dbBackup.pas' {frmDataBackup},
-  dbSettings in 'dbSettings.pas' {frmSettings};
+  dbSettings in 'dbSettings.pas' {frmSettings},
+  dbVars in 'dbVars.pas';
 
 {$R *.res}
 

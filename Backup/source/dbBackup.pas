@@ -28,7 +28,7 @@ type
     imgGreen: TImage;
     gbBackup: TGroupBox;
     LblHead: TLabel;
-    LblBackupFile: TLabel;
+    lblBackupFile: TLabel;
     Label4: TLabel;
     LblTask: TLabel;
     Pb: TProgressBar;
@@ -41,7 +41,6 @@ type
     acLagreSom: TAction;
     acSupport: TAction;
     SaveDialog: TSaveDialog;
-    Cab: TAbCabKit;
     acBackup: TAction;
     acRestore: TAction;
     btnRestoreFile: TButton;
@@ -68,18 +67,15 @@ type
     procedure FindFileFileMatch(Sender: TObject; const FileInfo: TFileDetails);
   private
     { Private declarations }
-    v_Db, v_Server: String;
-    v_Ant: Integer;
     v_Param: String;
-    FileList, LogList: TStringList;
-    Restore: Boolean;
-    procedure SetRestore;
+    FileList: TStringList;
+    procedure SetRestoreMode;
     function FindParameter(AllParam, Param: String): Boolean;
-    procedure SjekkBackupFiler;
-    procedure HentGlobaleVariabler;
+    procedure CheckAndCleanBackupFiles;
     function FindLastBackup: TFileName;
     procedure SetRestoreInfoLabel;
-    procedure LagreLoggFil(FileName: TFileName);
+    procedure SaveLog(FileName: TFileName);
+    procedure SetBackupLabel(TimeStamp: TDateTime = 0);
   public
     { Public declarations }
   end;
@@ -91,7 +87,7 @@ var
 implementation
 
 uses blsFileUtil, dbSettings, blsDialogs, IniFiles, JclMapi, JclSysInfo,
-  blsFirebird;
+  blsFirebird, dbVars, JclCompression, Sevenzip;
 
 {$R *.dfm}
 
@@ -107,31 +103,13 @@ begin
     Result := True;
 end;
 
-procedure TfrmDataBackup.HentGlobaleVariabler;
-var Ini: TIniFile;
+procedure TfrmDataBackup.SetBackupLabel(TimeStamp: TDateTime = 0);
 begin
-  if FileExists(Dir + 'config.ini') then
-    Ini := TIniFile.Create(Dir + 'config.ini')
+  if TimeStamp = 0 then
+    lblBackupFile.Caption := Dir + 'Backup\Data_yyyymmdd_hhmmss.7z'
   else
-    Ini := TIniFile.Create(Dir + 'database.ini');
-
-  try
-    v_Server := Ini.ReadString('Database', 'Server', '');
-    v_Db := Ini.ReadString('Database', 'Data', '');
-  finally
-    Ini.Free;
-  end;
-
-  if FileExists(Dir + 'config.ini') then
-    Ini := TIniFile.Create(Dir + 'config.ini')
-  else
-    Ini := TIniFile.Create(Dir + 'databackup.ini');
-
-  try
-    v_Ant := Ini.ReadInteger('Backup', 'Antall_Kopier', 7);
-  finally
-    Ini.Free;
-  end;
+    lblBackupFile.Caption := Dir + 'Backup\Data_' + FormatDateTime('yyyymmdd_hhmmss', Now) + '.7z';
+  lblBackupFile.Update;
 end;
 
 procedure TfrmDataBackup.FormCreate(Sender: TObject);
@@ -145,15 +123,15 @@ begin
   end;
   v_Param := StringReplace(v_Param, '-', '/', [rfReplaceAll]);
 
-  HentGlobaleVariabler;
-  LblBackupFile.Caption := Dir + 'Backup\data_yyyymmdd_hhmm.fdb';
+  blsApp.LastVariabler;
+  SetBackupLabel;
 
-  if FindParameter(v_Param, 'Restore') then begin
-    SetRestore;
-    Restore := True;
+  if FindParameter(v_Param, 'RESTORE') then begin
+    SetRestoreMode;
+    blsApp.IsRestore := True;
   end
   else
-    Restore := False;
+    blsApp.IsRestore := False;
 
   Ver.FileName := Application.ExeName;
   Caption := Caption + ' ' + Ver.FileVersion;
@@ -164,11 +142,11 @@ begin
   if not FileExists(LblBackupFile.Caption) then Exit;
   LblInfo.Visible := True;
   LblInfo.Caption := ' Valgt sikkerhetskopi er fra ' +
-    DateToStr(GetFileDate(LblBackupFile.Caption)) +
-    ' klokken ' + TimeToStr(GetFileDate(LblBackupFile.Caption));
+    DateToStr(GetFileDate(lblBackupFile.Caption)) +
+    ' klokken ' + TimeToStr(GetFileDate(lblBackupFile.Caption));
 end;
 
-procedure TfrmDataBackup.SetRestore;
+procedure TfrmDataBackup.SetRestoreMode;
 begin
   imgBackup.Visible := False;
   imgRestore.Visible := True;
@@ -185,20 +163,19 @@ begin
   SetRestoreInfoLabel;
   btnRestoreFile.Visible := True;
   frmDataBackup.PopupMenu := nil;
-  //Pb.Max := 204;
 end;
 
-procedure TfrmDataBackup.SjekkBackupFiler;
+procedure TfrmDataBackup.CheckAndCleanBackupFiles;
 begin
   FileList := TStringList.Create;
   try
-    FindFile.Criteria.Files.FileName := 'data_????????_??????.fbk';
+    FindFile.Criteria.Files.FileName := 'Data_????????_??????.7z';
     FindFile.Criteria.Files.Location := Dir + 'Backup\';
     FindFile.Execute;
     FileList.Sort;
 
     if FileList.Count > 0 then begin
-      while FileList.Count >= v_Ant do
+      while FileList.Count >= blsApp.AntBackup do
         if FileExists(Dir + 'Backup\' + FileList[0]) then begin
           DeleteFile(Dir + 'Backup\' + FileList[0]);
           FileList.Delete(0);
@@ -219,46 +196,47 @@ end;
 function TfrmDataBackup.FindLastBackup: TFileName;
 begin
   Result := '';
-  FileList := TStringList.Create;
-  try
-    FindFile.Criteria.Files.FileName := 'data_????????_??????.fbk';
-    FindFile.Criteria.Files.Location := Dir + 'Backup\';
-    FindFile.Execute;
-    FileList.Sort;
-
-    if FileList.Count > 0 then
-      Result := Dir + 'Backup\' + FileList[FileList.Count-1];
-
-  finally
-    FreeAndNil(FileList);
-  end;
+//  FileList := TStringList.Create;
+//  try
+//    FindFile.Criteria.Files.FileName := 'data_????????_??????.fbk';
+//    FindFile.Criteria.Files.Location := Dir + 'Backup\';
+//    FindFile.Execute;
+//    FileList.Sort;
+//
+//    if FileList.Count > 0 then
+//      Result := Dir + 'Backup\' + FileList[FileList.Count-1];
+//
+//  finally
+//    FreeAndNil(FileList);
+//  end;
 end;
 
-procedure TfrmDataBackup.LagreLoggFil(FileName: TFileName);
+procedure TfrmDataBackup.SaveLog(FileName: TFileName);
 begin
   FileList := TStringList.Create;
   try
-    FindFile.Criteria.Files.FileName := 'data_????????_??????.log';
+    //Fjerner gamle loggfiler
+    FindFile.Criteria.Files.FileName := 'Data_????????_??????.log';
     FindFile.Criteria.Files.Location := Dir + 'Logs\';
     FindFile.Execute;
     FileList.Sort;
 
-    while FileList.Count >= v_Ant do
+    while FileList.Count >= blsApp.AntBackup do
       if FileExists(Dir + 'Logs\' + FileList[0]) then begin
         DeleteFile(Dir + 'Logs\' + FileList[0]);
         FileList.Delete(0);
       end;
 
-    LogList.SaveToFile(Dir + 'Logs\' + FileName);
+    //Lagrer ny logg fil
+    blsApp.LoggList.SaveToFile(Dir + 'Logs\' + FileName);
   finally
     FreeAndNil(FileList);
   end;
 end;
 
-
 procedure TfrmDataBackup.btnStartClick(Sender: TObject);
 begin
-  if Restore then
+  if blsApp.IsRestore then
     acRestore.Execute
   else
     acBackup.Execute;
@@ -267,7 +245,7 @@ end;
 procedure TfrmDataBackup.uibBackupVerbose(Sender: TObject;
   Message: String);
 begin
-  LogList.Add(Message);
+  blsApp.LoggList.Add(Message);
   LblTask.Caption := Trim(StringReplace(Message, 'gbak:', '', []));
   LblTask.Update;
   Pb.StepIt;
@@ -278,14 +256,14 @@ begin
   frmSettings := TfrmSettings.Create(Application);
   frmSettings.ShowModal;
   frmSettings.Release;
-  HentGlobaleVariabler;
+  blsApp.LastVariabler;
 end;
 
 procedure TfrmDataBackup.acLagreSomExecute(Sender: TObject);
 begin
   if SaveDialog.Execute then begin
-    if FileExists(LblBackupFile.Caption) then begin
-      if not CopyFile(PWideChar(LblBackupFile.Caption), PWideChar(SaveDialog.FileName), False) then
+    if FileExists(lblBackupFile.Caption) then begin
+      if not CopyFile(PWideChar(lblBackupFile.Caption), PWideChar(SaveDialog.FileName), False) then
         ErrorDialog('Feil', 'En feil oppstod. Filen kunne ikke lagres!', btOK);
     end;
   end;
@@ -296,30 +274,20 @@ var EMail: TJclEMail;
     LoggFile: String;
     FName: String;
 begin
-  if FileExists(LblBackupFile.Caption) then begin
+  if FileExists(lblBackupFile.Caption) then begin
     EMail := TJclEMail.Create;
     try
       EMail.Clear;
-      EMail.Subject := 'Support E-post - DataBackup';
+      EMail.Subject := 'Support e-post - Backup';
       EMail.Body := 'Autogenerert support e-post:' + #13#10#13#10 +
                     ExtractFileName(Ver.FileName) + ' ' + Ver.FileVersion + ' (' +
                     JclSysInfo.GetWindowsVersionString + ' - ' +
                     JclSysInfo.GetWindowsServicePackVersionString + ')';
       EMail.Recipients.Add('support@fakuva.no', 'BLS Support');
-      FName := AddBackSlash(JclSysInfo.GetWindowsTempFolder) + ChangeFileExt(ExtractFileName(LblBackupFile.Caption), '.cab');
-      Cab.FileName := FName;
-      Cab.BaseDirectory := Dir + 'Backup\';
-      Cab.AddFiles(ExtractFileName(LblBackupFile.Caption), 0);
-      Cab.CloseArchive;
-
-      if FileExists(FName) then begin
-        EMail.Attachments.Add(FName);
-      end;
-
-      LoggFile := Dir + 'Logs\' + ChangeFileExt(ExtractFileName(LblBackupFile.Caption), '.log');
-      if FileExists(LoggFile) then begin
+      EMail.Attachments.Add(lblBackupFile.Caption);
+      LoggFile := Dir + 'Logs\' + ChangeFileExt(ExtractFileName(lblBackupFile.Caption), '.log');
+      if FileExists(LoggFile) then
         EMail.Attachments.Add(LoggFile);
-      end;
 
       EMail.Send(True);
     finally
@@ -330,62 +298,70 @@ begin
 end;
 
 procedure TfrmDataBackup.acBackupExecute(Sender: TObject);
-var FileName: String;
+var
+  DbBackupFile: String;
+  SevenZip: TJcl7zCompressArchive;
 begin
-  if (v_Ant = 0) or (v_DB = '') or (v_Server = '') then begin
-    InfoDialog('Innstillinger', 'Sikkerhetskopiering er ikke konfigurert ' +
-      'for denne datamaskinen.' + #13#10 + 'Vennligst oppgi nødvendige innstillinger.');
+  if (blsApp.AntBackup = 0) or (blsApp.Database = '') or (blsApp.Server = '')
+    or (blsApp.UNCDataFolder = '') then begin
+    InfoDialog('Innstillinger', 'Sikkerhetskopieringen må konfigureres!');
     acSettings.Execute;
+    Exit;
+  end;
+
+  if not Load7Zip then begin
+    ErrorDialog('Feil', 'Feil ved lasting av bibliotek for komprimering! (7z.dll)');
     Exit;
   end;
 
   ForceDirectories(Dir + 'Backup');
   ForceDirectories(Dir + 'Logs');
-  SjekkBackupFiler;
+  CheckAndCleanBackupFiles; //Slette gamle filer
 
   btnStart.Enabled := False;
   Pb.Position := 0;
-  FileName := 'data_' + FormatDateTime('yyyymmdd_hhmmss', Now) + '.fbk';
-  LblBackupFile.Caption := Dir + 'Backup\' + FileName;
-  LblBackupFile.Update;
+  DbBackupFile := 'data_' + FormatDateTime('yyyymmdd_hhmmss', Now) + '.fbk';
+  SetBackupLabel(Now);
+
   uibBackup.LibraryName := GetClientLib;
+  uibBackup.Host := blsApp.Server;
+  uibBackup.Database := blsApp.Database;
   uibBackup.BackupFiles.Clear;
-  uibBackup.BackupFiles.Add(Dir + 'Backup\' + FileName);
-  uibBackup.Database := v_Db;
-  if JclSysInfo.GetLocalComputerName = v_Server then
-    uibBackup.Protocol := proLocalHost
-  else begin
-    uibBackup.Protocol := proTCPIP;
-    uibBackup.Host := v_Server;
-  end;
+  uibBackup.BackupFiles.Add(ExtractFilePath(blsApp.Database) + '\' + DbBackupFile);
 
   try
-    try
-      LogList := TStringList.Create;
-      uibBackup.Run;
-      LagreLoggFil(ChangeFileExt(FileName, '.log'));
-    finally
-      LogList.Free;
-    end;
+    uibBackup.Run;
+    SaveLog(ChangeFileExt(DbBackupFile, '.log'));
+    blsApp.LoggList.Clear;
+
+    SevenZip := TJcl7zCompressArchive.Create(lblBackupFile.Caption);
+    if FileExists(blsApp.UNCDataFolder + DbBackupFile) then
+      SevenZip.AddFile(DbBackupFile, blsApp.UNCDataFolder + DbBackupFile);
+    //SevenZip.AddDirectory('Data', ADir, False, True);
+    SevenZip.Compress;
+    SevenZip.Free;
+
     Pb.Position := Pb.Max;
     LblTask.Caption := 'Sikkerhetskopiering fullført';
     acLagreSom.Enabled := True;
     acSupport.Enabled := True;
     if FindParameter(v_Param, 'AutoQuit') then
       Close;
+
   except
-    ErrorDialog('Feil', 'Sikkerhetskopiering kan ikke utføres. Mulig grunn kan være ' +
-      'manglende rettigheter.' + #13#10 + 'NB: Sikkerhetskopiering må kjøres fra database-serveren!', btOK);
+    ErrorDialog('Feil', 'Sikkerhetskopiering kan ikke utføres! ' +
+      'Mulig grunn kan være manglende rettigheter.', btOK);
     Pb.Position := 0;
-    LblTask.Caption := 'Feil ved sikkerhetskopiering';
+    lblTask.Caption := 'Feil ved sikkerhetskopiering';
   end;
+
   btnStart.Enabled := True;
 end;
 
 procedure TfrmDataBackup.acRestoreExecute(Sender: TObject);
 var LoggFile: TFileName;
 begin
-  if (v_Db = '') or (v_Server = '') then begin
+  if (blsApp.Database = '') or (blsApp.Server = '') then begin
     InfoDialog('Innstillinger', 'Innlesning av en sikkerhetskopi kan ikke utføres.' +
        #13#10 + 'Vennligst angi nødvendige innstillinger.');
     acSettings.Execute;
@@ -402,23 +378,15 @@ begin
     uibRestore.LibraryName := GetClientLib;
     uibRestore.BackupFiles.Clear;
     uibRestore.BackupFiles.Add(lblBackupFile.Caption);
-    uibRestore.Database := v_Db;
-    if JclSysInfo.GetLocalComputerName = v_Server then
-      uibRestore.Protocol := proLocalHost
-    else begin
-      uibRestore.Protocol := proTCPIP;
-      uibRestore.Host := v_Server;
-    end;
+    uibRestore.Database := blsApp.Database;
+    uibRestore.Host := blsApp.Server;
 
     try
-      try
-        LogList := TStringList.Create;
-        uibRestore.Run;
-        LoggFile := Dir + 'Logs\' + 'restore_' + FormatDateTime('yyyymmdd_hhmmss', Now) + '.log';
-        LogList.SaveToFile(LoggFile);
-      finally
-        LogList.Free;
-      end;
+      uibRestore.Run;
+      LoggFile := Dir + 'Logs\' + 'Restore_' + FormatDateTime('yyyymmdd_hhmmss', Now) + '.log';
+      blsApp.LoggList.SaveToFile(LoggFile);
+      blsApp.LoggList.Clear;
+
       Pb.Position := Pb.Max;
       LblTask.Caption := 'Innlesning fullført';
     except
@@ -434,7 +402,7 @@ end;
 procedure TfrmDataBackup.gbBackupEnter(Sender: TObject);
 begin
   Update;
-  if not Restore then
+  if not blsApp.IsRestore then
     if FindParameter(v_Param, 'AutoRun') then begin
       acBackup.Execute;
       btnAvslutt.SetFocus;
@@ -452,7 +420,7 @@ end;
 procedure TfrmDataBackup.uibRestoreVerbose(Sender: TObject;
   Message: String);
 begin
-  LogList.Add(Message);
+  blsApp.LoggList.Add(Message);
   LblTask.Caption := Trim(StringReplace(Message, 'gbak:', '', []));
   LblTask.Update;
   Pb.StepIt;
@@ -465,47 +433,42 @@ begin
   EMail := TJclEMail.Create;
   try
     EMail.Clear;
-    EMail.Subject := 'Utvidet Support E-post - DataBackup';
+    EMail.Subject := 'Utvidet support e-post - DataBackup';
     EMail.Body := 'Autogenerert support e-post:' + #13#10#13#10 +
                   ExtractFileName(Ver.FileName) + ' ' + Ver.FileVersion + ' (' +
                   JclSysInfo.GetWindowsVersionString + ' - ' +
                   JclSysInfo.GetWindowsServicePackVersionString + ')';
     EMail.Recipients.Add('support@fakuva.no', 'BLS Support');
 
-    FName := AddBackSlash(JclSysInfo.GetWindowsTempFolder) + 'support_data.cab';
-    Cab.FileName := FName;
-
     //Her må alle filene i katalogen backup og logg legges til...
     FileList := TStringList.Create;
     try
-      Cab.BaseDirectory := Dir + 'Backup\';
-      FindFile.Criteria.Files.FileName := 'data_????????_??????.fbk';
+      FindFile.Criteria.Files.FileName := 'Data_????????_??????.7z';
       FindFile.Criteria.Files.Location := Dir + 'Backup\';
       FindFile.Execute;
       while FileList.Count > 0 do begin
         if FileExists(Dir + 'Backup\' + FileList[0]) then begin
-          Cab.AddFiles(FileList[0], 0);
+          EMail.Attachments.Add(Dir + 'Backup\' + FileList[0]);
           FileList.Delete(0);
         end;
       end;
 
-      Cab.BaseDirectory := Dir + 'Logs\';
-      FindFile.Criteria.Files.FileName := 'data_????????_??????.log';
+      FindFile.Criteria.Files.FileName := 'Data_????????_??????.log';
       FindFile.Criteria.Files.Location := Dir + 'Logs\';
       FindFile.Execute;
       while FileList.Count > 0 do begin
         if FileExists(Dir + 'Logs\' + FileList[0]) then begin
-          Cab.AddFiles(FileList[0], 0);
+          EMail.Attachments.Add(Dir + 'Logs\' + FileList[0]);
           FileList.Delete(0);
         end;
       end;
 
-      FindFile.Criteria.Files.FileName := 'restore_????????_??????.log';
+      FindFile.Criteria.Files.FileName := 'Restore_????????_??????.log';
       FindFile.Criteria.Files.Location := Dir + 'Logs\';
       FindFile.Execute;
       while FileList.Count > 0 do begin
         if FileExists(Dir + 'Logs\' + FileList[0]) then begin
-          Cab.AddFiles(FileList[0], 0);
+          EMail.Attachments.Add(Dir + 'Logs\' + FileList[0]);
           FileList.Delete(0);
         end;
       end;
@@ -514,10 +477,6 @@ begin
       FreeAndNil(FileList);
     end;
 
-    Cab.CloseArchive;
-
-    if FileExists(FName) then
-      EMail.Attachments.Add(FName);
     EMail.Send(True);
   finally
     FreeAndNil(EMail);
