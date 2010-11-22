@@ -20,8 +20,11 @@ type
     Label3: TLabel;
     editServer: TEdit;
     editDB: TEdit;
+    Label4: TLabel;
+    edUNCPath: TEdit;
     procedure btnOKClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure editServerDblClick(Sender: TObject);
   private
     procedure Lagre;
     procedure Hent;
@@ -40,30 +43,16 @@ uses Registry, IniFiles, blsFileUtil;
 {$R *.dfm}
 
 procedure TfrmSettings.Lagre;
-var Ini: TIniFile;
+var
+  Ini: TIniFile;
 begin
   //Lagrer antall kopier til INI-fil
-  if FileExists(Dir + 'config.ini') then
-    Ini := TIniFile.Create(Dir + 'config.ini')
-  else
-    Ini := TIniFile.Create(Dir + 'databackup.ini');
-
+  Ini := TIniFile.Create(Dir + 'config.ini');
   try
     Ini.WriteInteger('Backup', 'Antall_Kopier', editAnt.Value);
-  finally
-    Ini.Free;
-  end;
-
-
-  //Lagrer antall kopier til INI-fil
-  if FileExists(Dir + 'config.ini') then
-    Ini := TIniFile.Create(Dir + 'config.ini')
-  else
-    Ini := TIniFile.Create(Dir + 'database.ini');
-
-  try
     Ini.WriteString('Database', 'Data', editDb.Text);
     Ini.WriteString('Database', 'Server', editServer.Text);
+    Ini.WriteString('Database', 'UNCDataFolder', edUNCPath.Text);
   finally
     Ini.Free;
   end;
@@ -78,30 +67,25 @@ procedure TfrmSettings.Hent;
 var Ini: TIniFile;
 begin
   //Lagrer antall kopier til INI-fil
-  if FileExists(Dir + 'config.ini') then
-    Ini := TIniFile.Create(Dir + 'config.ini')
-  else
-    Ini := TIniFile.Create(Dir + 'databackup.ini');
-
+  Ini := TIniFile.Create(Dir + 'config.ini');
   try
     editAnt.Value := Ini.ReadInteger('Backup', 'Antall_Kopier', 7);
-  finally
-    Ini.Free;
-  end;
-
-
-  //Lagrer antall kopier til INI-fil
-  if FileExists(Dir + 'config.ini') then
-    Ini := TIniFile.Create(Dir + 'config.ini')
-  else
-    Ini := TIniFile.Create(Dir + 'database.ini');
-
-  try
     editDb.Text := Ini.ReadString('Database', 'Data', '');
     editServer.Text := Ini.ReadString('Database', 'Server', '');
+    edUNCPath.Text := Ini.ReadString('Database', 'UNCDataFolder', '');
   finally
     Ini.Free;
   end;
+end;
+
+procedure TfrmSettings.editServerDblClick(Sender: TObject);
+begin
+  edUNCPath.ReadOnly := False;
+  editServer.ReadOnly := False;
+  editDB.ReadOnly := False;
+  edUNCPath.Color := clWindow;
+  editServer.Color := clWindow;
+  editDB.Color := clWindow;
 end;
 
 procedure TfrmSettings.FormCreate(Sender: TObject);

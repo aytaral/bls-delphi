@@ -1152,11 +1152,11 @@ object frmDataBackup: TfrmDataBackup
     object LblHead: TLabel
       Left = 24
       Top = 36
-      Width = 187
+      Width = 199
       Height = 13
-      Caption = 'Sikkerhetskopi blir lagret til f'#248'lgende fil:'
+      Caption = 'Sikkerhetskopien blir lagret til f'#248'lgende fil:'
     end
-    object LblBackupFile: TLabel
+    object lblBackupFile: TLabel
       Left = 24
       Top = 56
       Width = 134
@@ -1226,18 +1226,18 @@ object frmDataBackup: TfrmDataBackup
     end
   end
   object Ver: TStVersionInfo
-    Left = 348
-    Top = 36
+    Left = 352
+    Top = 40
   end
   object FindFile: TFindFile
     Criteria.Files.Subfolders = False
     OnFileMatch = FindFileFileMatch
-    Left = 380
-    Top = 36
+    Left = 384
+    Top = 40
   end
   object ActionList: TActionList
-    Left = 412
-    Top = 36
+    Left = 416
+    Top = 40
     object acSettings: TAction
       Caption = '&Innstillinger'
       OnExecute = acSettingsExecute
@@ -1266,8 +1266,8 @@ object frmDataBackup: TfrmDataBackup
     end
   end
   object PopMenu: TPopupMenu
-    Left = 348
-    Top = 68
+    Left = 352
+    Top = 72
     object Lagresikkerhetskopisom1: TMenuItem
       Action = acLagreSom
     end
@@ -1285,40 +1285,35 @@ object frmDataBackup: TfrmDataBackup
     end
   end
   object SaveDialog: TSaveDialog
-    DefaultExt = '*.fbk'
-    Filter = 'Firebird Database Backup (*.fbk)|*.fbk|Alle filer (*.*)|*.*'
+    DefaultExt = '*.7z'
+    Filter = 'Data Backup (*.7z)|*.7z|Alle filer (*.*)|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofEnableSizing]
-    Left = 380
-    Top = 68
-  end
-  object Cab: TAbCabKit
-    CompressionType = ctMSZIP
-    FolderThreshold = 0
-    SetID = 0
-    Left = 412
-    Top = 68
+    Left = 384
+    Top = 72
   end
   object OpenDialog: TOpenDialog
-    Left = 444
-    Top = 68
+    Left = 416
+    Top = 72
   end
   object uibBackup: TUIBBackup
     UserName = 'sysdba'
     PassWord = 'masterkey'
+    Protocol = proTCPIP
     LibraryName = 'gds32.dll'
     OnVerbose = uibBackupVerbose
     Verbose = True
-    Left = 376
+    Left = 384
     Top = 120
   end
   object uibRestore: TUIBRestore
     UserName = 'sysdba'
     PassWord = 'masterkey'
+    Protocol = proTCPIP
     LibraryName = 'gds32.dll'
     OnVerbose = uibRestoreVerbose
     Verbose = True
     Options = [roReplace, roCreateNewDB]
-    Left = 424
+    Left = 416
     Top = 120
   end
 end

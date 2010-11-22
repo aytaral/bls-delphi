@@ -3,8 +3,8 @@ object frmSettings: TfrmSettings
   Top = 300
   BorderStyle = bsDialog
   Caption = 'Innstillinger'
-  ClientHeight = 299
-  ClientWidth = 321
+  ClientHeight = 348
+  ClientWidth = 323
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,13 +15,13 @@ object frmSettings: TfrmSettings
   Position = poMainFormCenter
   OnCreate = FormCreate
   DesignSize = (
-    321
-    299)
+    323
+    348)
   PixelsPerInch = 96
   TextHeight = 13
   object btnOK: TButton
-    Left = 136
-    Top = 268
+    Left = 138
+    Top = 317
     Width = 85
     Height = 25
     Anchors = [akRight, akBottom]
@@ -30,10 +30,12 @@ object frmSettings: TfrmSettings
     ModalResult = 1
     TabOrder = 0
     OnClick = btnOKClick
+    ExplicitLeft = 136
+    ExplicitTop = 268
   end
   object btnAvbryt: TButton
-    Left = 228
-    Top = 268
+    Left = 230
+    Top = 317
     Width = 85
     Height = 25
     Anchors = [akRight, akBottom]
@@ -41,36 +43,46 @@ object frmSettings: TfrmSettings
     Caption = '&Avbryt'
     ModalResult = 2
     TabOrder = 1
+    ExplicitLeft = 228
+    ExplicitTop = 268
   end
   object PageControl1: TPageControl
     Left = 8
     Top = 8
     Width = 306
-    Height = 253
+    Height = 297
     ActivePage = TabSheet1
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'Generelt'
+      ExplicitHeight = 225
       object GroupBox1: TGroupBox
         Left = 8
         Top = 86
         Width = 281
-        Height = 123
+        Height = 171
         Caption = 'Database:'
         TabOrder = 0
         object Label2: TLabel
           Left = 16
           Top = 24
-          Width = 36
+          Width = 85
           Height = 13
-          Caption = 'Server:'
+          Caption = 'Database Server:'
         end
         object Label3: TLabel
           Left = 16
           Top = 68
-          Width = 58
+          Width = 169
           Height = 13
-          Caption = 'Databasefil:'
+          Caption = 'Databasefil (Lokal bane p'#229' server):'
+        end
+        object Label4: TLabel
+          Left = 16
+          Top = 116
+          Width = 89
+          Height = 13
+          Caption = 'UNC Data katalog:'
         end
         object editServer: TEdit
           Left = 16
@@ -80,6 +92,7 @@ object frmSettings: TfrmSettings
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 0
+          OnDblClick = editServerDblClick
         end
         object editDB: TEdit
           Left = 16
@@ -89,6 +102,17 @@ object frmSettings: TfrmSettings
           Color = clBtnFace
           ReadOnly = True
           TabOrder = 1
+          OnDblClick = editServerDblClick
+        end
+        object edUNCPath: TEdit
+          Left = 16
+          Top = 132
+          Width = 249
+          Height = 21
+          Color = clBtnFace
+          ReadOnly = True
+          TabOrder = 2
+          OnDblClick = editServerDblClick
         end
       end
       object GroupBox2: TGroupBox
