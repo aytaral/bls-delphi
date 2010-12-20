@@ -54,9 +54,9 @@ object frmDataBackup: TfrmDataBackup
     object lblSubTitle: TLabel
       Left = 16
       Top = 36
-      Width = 287
+      Width = 239
       Height = 13
-      Caption = 'Det vil n'#229' bli tatt en kopi av dataene registrert i ditt system.'
+      Caption = 'Det vil n'#229' bli tatt en kopi av dataene i ditt system.'
     end
     object Image1: TImage
       Left = 0

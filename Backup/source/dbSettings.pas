@@ -11,7 +11,7 @@ type
     btnOK: TButton;
     btnAvbryt: TButton;
     PageControl1: TPageControl;
-    TabSheet1: TTabSheet;
+    tsGeneral: TTabSheet;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     Label1: TLabel;
@@ -22,6 +22,8 @@ type
     editDB: TEdit;
     Label4: TLabel;
     edUNCPath: TEdit;
+    tsFiles: TTabSheet;
+    memFiles: TMemo;
     procedure btnOKClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure editServerDblClick(Sender: TObject);
@@ -56,6 +58,8 @@ begin
   finally
     Ini.Free;
   end;
+
+  memFiles.Lines.SaveToFile(Dir + 'FilListe.txt');
 end;
 
 procedure TfrmSettings.btnOKClick(Sender: TObject);
@@ -76,6 +80,9 @@ begin
   finally
     Ini.Free;
   end;
+
+  if FileExists(Dir + 'FilListe.txt') then
+    memFiles.Lines.LoadFromFile(Dir + 'FilListe.txt');
 end;
 
 procedure TfrmSettings.editServerDblClick(Sender: TObject);
