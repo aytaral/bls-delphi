@@ -59,7 +59,7 @@
 						<VersionInfo Name="MajorVer">2</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">29</VersionInfo>
+						<VersionInfo Name="Build">30</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -71,7 +71,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Bjørn Larsen Software</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">BLS Data Backup</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">2.0.0.29</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">2.0.0.30</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName"/>
 						<VersionInfoKeys Name="LegalCopyright"/>
 						<VersionInfoKeys Name="LegalTrademarks"/>

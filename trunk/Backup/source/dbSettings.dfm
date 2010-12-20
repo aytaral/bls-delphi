@@ -30,8 +30,6 @@ object frmSettings: TfrmSettings
     ModalResult = 1
     TabOrder = 0
     OnClick = btnOKClick
-    ExplicitLeft = 136
-    ExplicitTop = 268
   end
   object btnAvbryt: TButton
     Left = 230
@@ -43,19 +41,16 @@ object frmSettings: TfrmSettings
     Caption = '&Avbryt'
     ModalResult = 2
     TabOrder = 1
-    ExplicitLeft = 228
-    ExplicitTop = 268
   end
   object PageControl1: TPageControl
     Left = 8
     Top = 8
     Width = 306
     Height = 297
-    ActivePage = TabSheet1
+    ActivePage = tsGeneral
     TabOrder = 2
-    object TabSheet1: TTabSheet
+    object tsGeneral: TTabSheet
       Caption = 'Generelt'
-      ExplicitHeight = 225
       object GroupBox1: TGroupBox
         Left = 8
         Top = 86
@@ -139,6 +134,20 @@ object frmSettings: TfrmSettings
           TabOrder = 0
           Value = 7
         end
+      end
+    end
+    object tsFiles: TTabSheet
+      BorderWidth = 8
+      Caption = 'Tileggsfiler'
+      ImageIndex = 1
+      object memFiles: TMemo
+        Left = 0
+        Top = 0
+        Width = 282
+        Height = 253
+        Align = alClient
+        ScrollBars = ssVertical
+        TabOrder = 0
       end
     end
   end

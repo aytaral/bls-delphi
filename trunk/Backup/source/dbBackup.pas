@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, FindFile, StBase, StVInfo, jpeg, Registry,
-  pngimage, ComCtrls, blsInfiniteBar, XPMan, ActnList, Menus, AbBase,
-  AbBrowse, AbCBrows, AbCabMak, AbCabKit, JvComponentBase, uib;
+  pngimage, ComCtrls, blsInfiniteBar, XPMan, ActnList, Menus, JvComponentBase, uib;
 
 type
   TfrmDataBackup = class(TForm)
@@ -72,7 +71,6 @@ type
     procedure SetRestoreMode;
     function FindParameter(AllParam, Param: String): Boolean;
     procedure CheckAndCleanBackupFiles;
-    function FindLastBackup: TFileName;
     procedure SetRestoreInfoLabel;
     procedure SaveLog(FileName: TFileName);
     procedure SetBackupLabel(TimeStamp: TDateTime = 0);
@@ -87,7 +85,7 @@ var
 implementation
 
 uses blsFileUtil, dbSettings, blsDialogs, IniFiles, JclMapi, JclSysInfo,
-  blsFirebird, dbVars, JclCompression, Sevenzip;
+  blsFirebird, dbVars, JclCompression, Sevenzip, JclFileUtils;
 
 {$R *.dfm}
 
@@ -153,13 +151,14 @@ begin
   imgGreen.Visible := False;
   imgRed.Visible := True;
   frmDataBackup.PopupMenu := nil;
+  btnStart.Enabled := False;
 
   LblHead.Caption := 'Leser inn sikkerhetskopi fra følgende fil:';
   LblTask.Caption := 'Klar til innlesning av sikkerhetskopi';
   lblTitle.Caption := 'Innlesing av sikkerhetskopi';
   lblSubTitle.Caption := 'Dine eksisterende data vil nå bli overskrevet med data fra sikkerhetskopien';
   
-  LblBackupFile.Caption := FindLastBackup;
+  LblBackupFile.Caption := 'Vennligst velg backup fil!';
   SetRestoreInfoLabel;
   btnRestoreFile.Visible := True;
   frmDataBackup.PopupMenu := nil;
@@ -191,24 +190,6 @@ procedure TfrmDataBackup.FindFileFileMatch(Sender: TObject;
   const FileInfo: TFileDetails);
 begin
   FileList.Add(FileInfo.Name);
-end;
-
-function TfrmDataBackup.FindLastBackup: TFileName;
-begin
-  Result := '';
-//  FileList := TStringList.Create;
-//  try
-//    FindFile.Criteria.Files.FileName := 'data_????????_??????.fbk';
-//    FindFile.Criteria.Files.Location := Dir + 'Backup\';
-//    FindFile.Execute;
-//    FileList.Sort;
-//
-//    if FileList.Count > 0 then
-//      Result := Dir + 'Backup\' + FileList[FileList.Count-1];
-//
-//  finally
-//    FreeAndNil(FileList);
-//  end;
 end;
 
 procedure TfrmDataBackup.SaveLog(FileName: TFileName);
@@ -340,6 +321,7 @@ begin
     //SevenZip.AddDirectory('Data', ADir, False, True);
     SevenZip.Compress;
     SevenZip.Free;
+    FileDelete(blsApp.UNCDataFolder + DbBackupFile);
 
     Pb.Position := Pb.Max;
     LblTask.Caption := 'Sikkerhetskopiering fullført';
@@ -414,6 +396,7 @@ begin
   if OpenDialog.Execute then begin
     lblBackupFile.Caption := OpenDialog.FileName;
     SetRestoreInfoLabel;
+    btnStart.Enabled := True;
   end;
 end;
 
@@ -458,7 +441,7 @@ begin
       FindFile.Execute;
       while FileList.Count > 0 do begin
         if FileExists(Dir + 'Logs\' + FileList[0]) then begin
-          EMail.Attachments.Add(Dir + 'Logs\' + FileList[0]);
+          EMail.Attachments.Add(AnsiString(Dir + 'Logs\' + FileList[0]));
           FileList.Delete(0);
         end;
       end;
@@ -468,7 +451,7 @@ begin
       FindFile.Execute;
       while FileList.Count > 0 do begin
         if FileExists(Dir + 'Logs\' + FileList[0]) then begin
-          EMail.Attachments.Add(Dir + 'Logs\' + FileList[0]);
+          EMail.Attachments.Add(AnsiString(Dir + 'Logs\' + FileList[0]));
           FileList.Delete(0);
         end;
       end;
