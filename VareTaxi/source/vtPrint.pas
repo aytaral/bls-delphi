@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses Printers, blsFileUtil;
+uses Printers, blsFileUtil, JclSysInfo;
 
 {$R *.dfm}
 
@@ -50,29 +50,22 @@ var Ini: TIniFile;
 begin
   Ini := TInifile.Create(Dir + 'RVT.INI');
   try
-    PrimPrinter := Ini.ReadInteger('Printer', 'PrimIndex', -1);
-    SekPrinter := Ini.ReadInteger('Printer', 'AltIndex', -1);
+    PrimPrinter := Ini.ReadInteger('Printer', 'PrimIndex' + JclSysInfo.GetLocalComputerName, -1);
+    SekPrinter := Ini.ReadInteger('Printer', 'AltIndex' + JclSysInfo.GetLocalComputerName, -1);
     EditAnt1.Value := Ini.ReadInteger('Printer', 'PrimKopi', 1);
     EditAnt2.Value := Ini.ReadInteger('Printer', 'AltKopi', 1);
 
-    LblPrimPrinter.Caption := Printer.Printers[PrimPrinter];    
-    if PrimPrinter > 0 then begin
-      if PrimPrinter < Printer.Printers.Count then
-        LblPrimPrinter.Caption := Printer.Printers[PrimPrinter]
-      else begin
-        PrimPrinter := Printer.PrinterIndex;
-        LblPrimPrinter.Caption := Printer.Printers[Printer.PrinterIndex];
-      end;
-    end
-    else
+    if (PrimPrinter > -1) and (PrimPrinter <= Printer.Printers.Count -1) then
+      LblPrimPrinter.Caption := Printer.Printers[PrimPrinter]
+    else begin
       PrimPrinter := Printer.PrinterIndex;
+      LblPrimPrinter.Caption := Printer.Printers[Printer.PrinterIndex];
+    end;
 
-    if SekPrinter > 0 then begin
-      if SekPrinter < Printer.Printers.Count then begin
-        LblSekPrinter.Caption := Printer.Printers[SekPrinter];
-        LblSekPrinter.Font.Color := clWindowText;
-        EditAnt2.Enabled := True;
-      end;
+    if (SekPrinter > -1) and (SekPrinter <= Printer.Printers.Count -1) then begin
+      LblSekPrinter.Caption := Printer.Printers[SekPrinter];
+      LblSekPrinter.Font.Color := clWindowText;
+      EditAnt2.Enabled := True;
     end;
 
     cbAltPrinter.Checked := Ini.ReadBool('Printer', 'BrukAltPrinter', False);
@@ -80,13 +73,13 @@ begin
   finally
     Ini.Free;
   end;
-
-
 end;
 
 procedure TfrmPrint.BtnPrint1Click(Sender: TObject);
 begin
-  Printer.PrinterIndex := PrimPrinter;
+  if (PrimPrinter > -1) and (PrimPrinter <= Printer.Printers.Count -1) then
+    Printer.PrinterIndex := PrimPrinter;
+
   if DlgPrinter.Execute then begin
     LblPrimPrinter.Caption := Printer.Printers[Printer.PrinterIndex];
     PrimPrinter := Printer.PrinterIndex;
@@ -98,11 +91,12 @@ var Ini: TIniFile;
 begin
   Ini := TInifile.Create(Dir + 'RVT.INI');
   try
-    Ini.WriteInteger('Printer', 'PrimIndex', PrimPrinter);
-    Ini.WriteInteger('Printer', 'PrimKopi', EditAnt1.Value);
-    Ini.WriteInteger('Printer', 'AltIndex', SekPrinter);
-    Ini.WriteInteger('Printer', 'AltKopi', EditAnt2.Value);
     Ini.WriteBool('Printer', 'BrukAltPrinter', cbAltPrinter.Checked);
+    Ini.WriteInteger('Printer', 'PrimKopi', EditAnt1.Value);
+    Ini.WriteInteger('Printer', 'AltKopi', EditAnt2.Value);
+
+    Ini.WriteInteger('Printer', 'PrimIndex-' + JclSysInfo.GetLocalComputerName, PrimPrinter);
+    Ini.WriteInteger('Printer', 'AltIndex-' + JclSysInfo.GetLocalComputerName, SekPrinter);
   finally
     Ini.Free;
   end;
@@ -110,7 +104,9 @@ end;
 
 procedure TfrmPrint.BtnPrint2Click(Sender: TObject);
 begin
-  Printer.PrinterIndex := SekPrinter;
+  if (SekPrinter > -1) and (SekPrinter <= Printer.Printers.Count -1) then
+    Printer.PrinterIndex := SekPrinter;
+
   if DlgPrinter.Execute then begin
     LblSekPrinter.Caption := Printer.Printers[Printer.PrinterIndex];
     SekPrinter := Printer.PrinterIndex;
@@ -131,7 +127,6 @@ begin
     LblSekPrinter.Font.Color := clWindowText;
     EditAnt2.Enabled := True;
   end;
-
 end;
 
 end.
