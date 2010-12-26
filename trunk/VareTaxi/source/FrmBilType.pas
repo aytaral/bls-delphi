@@ -63,7 +63,7 @@ begin
 end;
 
 procedure TBilTypeFrm.BtnOppClick(Sender: TObject);
-var Str, Tmp: String;
+var Str: String;
 begin
   if Lb.ItemIndex > 0 then begin
     Str := Lb.Items[Lb.ItemIndex - 1];
