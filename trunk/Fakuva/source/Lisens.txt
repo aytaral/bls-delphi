@@ -1,0 +1,17 @@
+Lisens - avtale for Fakuva!
+
+Dette programmet er beskyttet ifølge lover om opphavsrett og 
+internasjonale konvensjoner, herunder lov av 12. mai 1961 
+nr. 2 om opphavsrett til åndsverk m.v. Uautorisert kopiering
+eller distribusjon av programmet eller deler av det vil bli
+forfulgt rettslig iht. relevante bestemmelser.
+
+NB: Programmet er ikke godkjent for regnskap! Man er derfor nødt 
+til å basere regnskapet sitt på papir-utskrifter av fakturaer!
+
+Bjørn Larsen Software fraskriver seg alt ansvar når det gjelder
+bruk og utvikling av faktura-programmet. Eventuell verdi av tapt arbeidstid og kostnader ved feil vil vi ikke stå ansvarlig for. 
+Dette er kun en forhåndsregel vi må ta for å ikke få for store heftelser ved eventuelle feil.
+Vi hjelper dere gjerne om det skulle by på noen problemer og 
+det er bare å ta kontakt på support@fakuva.no eller besøk 
+http://www.fakuva.no for mer informasjon!
