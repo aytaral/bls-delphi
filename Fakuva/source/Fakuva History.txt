@@ -1,0 +1,132 @@
+5.5.2.104 (11.12.11)
+ - Oppdatert kompilering
+
+5.5.2.103 (09.12.09)
+ - Lagt til støtte for utskrift av kvittering og purring uten giro del.
+ - Forbedret støtte for utskrift til PDF for elektronisk sending. (doPDF)
+   http://www.dopdf.com/download/setup/dopdf.exe
+
+5.5.2.102 (08.09.09)
+ - Lagt til støtte for utskrift av faktura uten giro del. Ny setting under "Innstillinger\Faktura"
+
+5.5.2.101 (21.10.08)
+ - Forbedret støtte for Windows Vista
+ - Rettelse for tegnefeil i forhåndsvisning under Vista.
+ - Fiks for endring av varetype under vareregistrering.
+
+5.5.1.357 (01.10.08)
+ - Bedre støtte for scrolling med mus i postnummer liste. 
+ - Oppdatert Postnummer liste tilgjengelig.
+ - Fiks for oppslag mot Brønnøysundregistrene fra nyinntastet org.nr.
+
+5.5.1.356 (06.01.08)
+ - Lagt inn integrering mot Br.reg.
+
+5.5.1.355 (03.12.07)
+ - Integrert FastMM4
+
+5.5.1.354 (07.01.07)
+ - Rettelse av faktura utskrift. Se punkt under.
+
+5.5.1.353 (07.01.07)
+ - Lagt til styring av Varenr feltet på faktura utskrift fra INI-fil (Font størrelse og ventre justering).
+
+5.5.1.353 (03.10.06)
+ - Bedre støtte for scrolling med mus.
+ - Rettet avansert søk kunder.
+
+5.5.1.352 (03.10.05)
+ - Lagt til rapport for utskrift av kundeuttak per vare-kategori.
+
+5.5.1.351 (25.01.05)
+ - Lagt til mulighet for å overstyre mva sats. Nødvendig for å kunne kreditere en faktura med 24% mva.
+ - Lagt til kolonne for Mva sats i vare-lista. 
+
+5.5.1.350 (20.01.05)
+ - Fjernet sum av avgiftsfritt salg fra rapport & beregning av omsetning grunnet feil som følge av nye mva satser.
+
+5.5.1.349 (07.01.05)
+ - Fikset feil ved lagring av instillinger i demo (Gjelder kun for Windows 98)
+
+5.5.1.348 (04.01.05)
+ - Lagt til støtte for automatisk oppdatering via internett
+ - Rettet feil ved registrering av Serienummer
+
+5.5.1.347 (27.12.04)
+ - Forbedringer for støtte av 25%, 11%, 7% mva
+
+5.5.1.346 (23.12.04)
+ - Lagt til mulighet for justering av MVA satsene på registrerte varer
+
+5.5.1.345 (20.12.04)
+ - Lagt til støtte for 25% mva
+
+5.5.1.343 (14.12.04)
+ - Rettet feil ved generering av KID/kontrollsum på faktura.
+
+5.5.1.341 (15.11.04)
+ - Lagt til "Salgsrapport" med utskrift og summering av fakturaer for en periode fordelt etter "Vår ref".
+
+5.5.1.336 (07.10.04)
+ - Rettet feil med renteberegning på utskrift av purring. (Benyttet 12% uavhengig av hva som var spesifisert).
+
+5.5.1.334 (20.08.04)
+ - Rettet på fakturaliste utskrift. Mer plass til kolonnene med beløp.
+
+5.5.1.333 (21.07.04)
+ - Lag til rapport for omsetning per vare. Rapporten er omstrukturert med noe forbedret hastighet og basert på oppgitt tidsperiode.
+
+5.5.1.332 (20.07.04)
+ - Sortering av fakturalinjer etter varenummer lagt inn.
+
+5.5.1.331 (28.05.04)
+ - Lagt inn mulighet for tre forsøk ved innlogging
+ - Rettet feil så dagens dato foreslås ved registrering av betalt faktura.
+
+5.5.1.330 (20.04.04)
+ - Lag til vindu med fakturainformasjon (tilgjengelig fra høyreklikk i fakturalista) hvor blant annet betalt dato er tilgjenglig.
+
+5.5.1.329 (30.03.04)
+ - Lagt til rapport for omsetning innefor kundegruppe.
+ - Ny rapport for kundegrupper
+
+5.5.1.327 (29.03.04)
+ - Lagt til periode start og slutt for omsetningsrapporter.
+
+5.5.1.326 (18.03.04)
+ - Rapport for vareomsettning fjernet da denne er for treg.
+
+5.5.1.323 (14.03.04)
+ - Forbedret rapporter med ny heading etc.
+
+5.5.1.322 (14.03.04)
+ - Ny forhåndsvisning med utvidede muligheter (Høyreklikk zoom, Drag & Drop navigering, printing fra-til side,)
+ - Lagringsformatet .QRP fjernet fra rapportene.
+ - Ny rapport-veiviser (Valg av rapporter)
+
+5.5.1.321 (13.03.04)
+ - Firmaopplysninger lagt ut i eget vindu.
+ - Muligheter for å velge postnummer ved å dobbeltklikke på postnummer i postnummersøk.
+ - Muligheter for å navigere med pil opp/ned og pg opp/ned i postnummersøk.
+
+5.5.1.320 (11.03.04)
+ - Fikset så navn med små og store forbokstaver havner i samme gruppe i rapporter for vare, kunde og leverandør.
+
+5.5.1.318 (10.03.04)
+ - Lagt inn lagring av dato for innbetaling av en faktura.
+
+5.5.1.314 (24.02.04)
+ - Lagt til mulighet for beregning av Forsikring på faktura (Prosent av nettosum).
+
+5.5.1.313 (21.02.04)
+ - Lagrer posisjonen til programmet ved avsluttning og setter lagret posisjon ved oppstart.
+
+5.5.1.310 (28.01.04)
+ - Fikset "Single Instance". Dvs at kun en instans av Fakuva kan kjøre pr maskin.
+ - Endret farge på låste felter i kunde-, vare- og leverandørregistrering.
+
+5.5.1.307 (16.12.03)
+ - Ny knapperad-komponent i fakturabildet XP-style
+ - Felt for poststed i leveringsadresse
+ - Ny generering av adresser på faktura
+
