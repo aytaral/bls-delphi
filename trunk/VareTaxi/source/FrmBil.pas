@@ -35,6 +35,7 @@ type
     ToolButton3: TToolButton;
     TBF: TToolButton;
     TBN: TToolButton;
+    cbInaktiv: TCheckBox;
     procedure TBPrintClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure TBNrClick(Sender: TObject);
@@ -83,6 +84,7 @@ begin
   BilDBKmpris.Value   := StrToCurr(Kmprisedit.Text);
   BilDBTimepris.Value := StrToCurr(Timeprisedit.Text);
   BilDBLokalPris.Value:= StrToCurr(Lokaledit.Text);
+  BilDBInAktiv.Value  := cbInAktiv.Checked;
   BilDB.Post;
  end;
 end;
@@ -99,6 +101,7 @@ begin
   Kmprisedit.Text    :=   CurrToStrF(BilDBKmpris.Value, ffFixed, 2);
   Timeprisedit.Text  :=   CurrToStrF(BilDBTimepris.Value, ffFixed, 2);
   Lokaledit.Text     :=   CurrToStrF(BilDBLokalpris.Value, ffFixed, 2);
+  cbInAktiv.Checked  :=   BilDBInAktiv.Value;
  end;
 end;
 
@@ -147,6 +150,7 @@ begin
  Kmprisedit.Text    := '0,00';
  Timeprisedit.Text  := '0,00';
  Lokaledit.Text     := '0,00';
+ cbInAktiv.Checked  := False;
 end;
 
 procedure TBilFrm.TBNyClick(Sender: TObject);

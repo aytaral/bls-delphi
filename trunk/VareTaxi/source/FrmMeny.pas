@@ -164,8 +164,8 @@ type
     Tekstbehandler1: TMenuItem;
     DBGrid6: TDBGrid;
     DBGrid5: TDBGrid;
-    DBGrid4: TDBGrid;
-    DBGrid3: TDBGrid;
+    SjoforGrid: TDBGrid;
+    BilGrid: TDBGrid;
     KundeGrid: TDBGrid;
     FakturaGrid: TDBGrid;
     OrdreGrid: TDBGrid;
@@ -287,6 +287,8 @@ type
     cbFellesAvtale: TCheckBox;
     PopupMenu1: TPopupMenu;
     Slettavtale1: TMenuItem;
+    popGrid: TPopupMenu;
+    popVisInAktive: TMenuItem;
     procedure Om2Click(Sender: TObject);
     procedure Postadresser1Click(Sender: TObject);
     procedure TLagreClick(Sender: TObject);
@@ -347,6 +349,13 @@ type
     procedure edSokAvtaleKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Slettavtale1Click(Sender: TObject);
+    procedure popVisInAktiveClick(Sender: TObject);
+    procedure KundeGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure BilGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure SjoforGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     procedure SlettKunde;
@@ -1273,6 +1282,7 @@ end;
 procedure TMenyFrm.ArkChange(Sender: TObject);
 begin
  ResetBtn;
+ DM.VisKunAktive(True);
 
  Case Ark.ActivePage.PageIndex of
  0: begin
@@ -1546,6 +1556,38 @@ begin
     Dm.AvtaleDB.Delete;
   end;
 
+end;
+
+procedure TMenyFrm.popVisInAktiveClick(Sender: TObject);
+begin
+  DM.VisKunAktive(False);
+end;
+
+procedure TMenyFrm.KundeGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if DM.KundeDBInAktiv.Value then
+    KundeGrid.Canvas.Font.Color := clRed;
+  KundeGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TMenyFrm.BilGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if DM.BilDBInAktiv.Value then
+    BilGrid.Canvas.Font.Color := clRed;
+  BilGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TMenyFrm.SjoforGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if DM.SjoforDBInAktiv.Value then
+    SjoforGrid.Canvas.Font.Color := clRed;
+  SjoforGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 end.
