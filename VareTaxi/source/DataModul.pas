@@ -292,19 +292,29 @@ type
     OrdreDBKmPris: TFloatField;
     OrdreDBFastPris: TFloatField;
     OrdreDBLokalPris: TBooleanField;
+    SjoforDBInAktiv: TBooleanField;
+    BilDBInAktiv: TBooleanField;
+    KundeDBInAktiv: TBooleanField;
     procedure FakturaDBCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure tblAvtaleCalcFields(DataSet: TDataSet);
     procedure tblAvtaleNewRecord(DataSet: TDataSet);
     procedure OrdreDBNewRecord(DataSet: TDataSet);
+    procedure SjoforDBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+    procedure KundeDBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+    procedure BilDBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
   private
+    { Private declarations }
+    FilterKunde: Boolean;
+    FilterBil: Boolean;
+    FilterSjofor: Boolean;
     procedure CloseDataSets;
     procedure OpenDataSets;
-    { Private declarations }
   public
     { Public declarations }
     //procedure FakturaTotal;
+    procedure VisKunAktive(Filtrer: Boolean);
     procedure RundAvTotalsum;
     procedure RundAvPurreTotal;
   end;
@@ -437,6 +447,10 @@ procedure TDM.DataModuleCreate(Sender: TObject);
 var TmpDir, Path: String;
     Ini: TIniFile;
 begin
+  FilterKunde := True;
+  FilterSjofor := True;
+  FilterBil := True;
+
   Session.NetFileDir := Dir;
   TmpDir := AddBackSlash(PathGetLongName(GetWindowsTempFolder)) + 'RVT\';
   ForceDirectories(TmpDir);
@@ -485,6 +499,37 @@ begin
   OrdreDBFastPris.Value := 0;
   OrdreDBTimePris.Value := 0;
   OrdreDBKmPris.Value := 0;
+end;
+
+procedure TDM.SjoforDBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+begin
+  Accept := True;
+  if FilterSjofor then
+    Accept := not SjoforDBInAktiv.Value;
+end;
+
+procedure TDM.KundeDBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+begin
+  Accept := True;
+  if FilterKunde then
+    Accept := not KundeDBInAktiv.Value;
+end;
+
+procedure TDM.BilDBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+begin
+  Accept := True;
+  if FilterBil then
+    Accept := not BilDBInAktiv.Value;
+end;
+
+procedure TDM.VisKunAktive(Filtrer: Boolean);
+begin
+  DM.FilterKunde := Filtrer;
+  DM.FilterBil := Filtrer;
+  DM.FilterSjofor := Filtrer;
+  DM.KundeDB.Refresh;
+  DM.BilDB.Refresh;
+  DM.SjoforDB.Refresh;
 end;
 
 end.

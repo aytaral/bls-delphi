@@ -40,6 +40,7 @@ type
     ToolButton3: TToolButton;
     TBF: TToolButton;
     TBN: TToolButton;
+    cbInaktiv: TCheckBox;
     procedure VelgPostadrClick(Sender: TObject);
     procedure PostnrEDITExit(Sender: TObject);
     procedure TBPrintClick(Sender: TObject);
@@ -162,6 +163,7 @@ begin
  mobedit.Text        := '';
  timelonnedit.Text   := '0,00';
  epostedit.Text      := '';
+ cbInAktiv.Checked   := False;
 end;
 
 procedure TSjoforFrm.Registrer;
@@ -178,6 +180,7 @@ begin
   SjoforDBMobil.Value         :=  mobedit.Text;
   SjoforDBEpost.Value         :=  epostedit.Text;
   SjoforDBTimelonn.Value      :=  StrToCurr(timelonnedit.Text);
+  SjoforDBInAktiv.Value       :=  cbInAktiv.Checked;
   SjoforDB.Post;
  If Not PostDB.Locate('Postnr', postnredit.Text, []) and (Postnredit.Text <> '') then begin
  PostDB.Append;
@@ -215,6 +218,7 @@ begin
  mobedit.Text        := SjoforDBMobil.Value;
  epostedit.Text      := SjoforDBEpost.Value;
  timelonnedit.Text   := CurrToStrF(SjoforDBTimelonn.Value, ffNumber, 2);
+ cbInAktiv.Checked   := SjoforDBInAktiv.Value;
  end;
 end;
 
