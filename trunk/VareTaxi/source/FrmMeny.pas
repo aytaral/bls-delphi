@@ -571,9 +571,13 @@ end;
 procedure TMenyFrm.SlettKunde;
 begin
  If DM.KundeDB.RecordCount <> 0 then begin
- If MessageDlg('Ønsker du å slette kunden ' + DM.KundeDBFirma.Value + '? Alle avtaler, ordre og fakturaer til '+ DM.KundeDBFirma.Value +' vil også bli slettet!', mtConfirmation, [mbYes, mbNO],0) = mrYes then begin
+ If MessageDlg('Ønsker du å sette kunden ' + DM.KundeDBFirma.Value + ' inaktiv?', mtConfirmation, [mbYes, mbNO],0) = mrYes then begin
+   DM.KundeDB.Edit;
+   DM.KundeDBInAktiv.Value := True;
+   DM.KundeDB.Post;
 
- With DM.AvtaleDB Do begin
+
+{ With DM.AvtaleDB Do begin
  DisableControls;
  try
   First;
@@ -617,18 +621,21 @@ begin
  end;
  end;
 
- DM.KundeDB.Delete;
+ DM.KundeDB.Delete; }
  end;
- end;
+ end; 
 end;
 
 procedure TMenyFrm.SlettBil;
 begin
  If DM.BilDB.RecordCount <> 0 then
   begin
-   If MessageDlg('Ønsker du å slette bile med registreringsnr ' + DM.BilDBRegnr.Value + '? Alle ordre med denne bilen vil også bli slettet!', mtConfirmation, [mbYes, mbNO],0) = mrYes then
+   If MessageDlg('Ønsker du å sette bil med registreringsnr ' + DM.BilDBRegnr.Value + ' inaktiv?', mtConfirmation, [mbYes, mbNO],0) = mrYes then
     begin
-     DM.BilDb.Delete;
+      DM.BilDB.Edit;
+      DM.BilDBInAktiv.Value := True;
+      DM.BilDB.Post;
+       //DM.BilDb.Delete;
     End;
    End;
  {With DM.OrdreDb do begin
@@ -666,9 +673,12 @@ end;
 procedure TMenyFrm.SlettSjofor;
 begin
  If DM.SjoforDB.RecordCount <> 0 then begin
- If MessageDlg('Dette sletter sjåfør ' + DM.SjoforDBNavn.Value + '. Alle ordre med ' + DM.SjoforDBNavn.Value + ' som sjåfør vil også bli slettet!',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+ If MessageDlg('Ønsker du å sette sjåfør ' + DM.SjoforDBNavn.Value + ' inaktiv?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
-   Dm.SjoforDB.Delete;
+    DM.SjoforDB.Edit;
+    DM.SjoforDBInAktiv.Value := True;
+    DM.SjoforDB.Post;
+   //Dm.SjoforDB.Delete;
   End;
  End; 
 
