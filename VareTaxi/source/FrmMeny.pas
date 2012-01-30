@@ -1311,6 +1311,7 @@ begin
  end;
 
  1: begin
+ DM.VisKunAktive(False);
  If DM.FakturaDB.Filtered = True then
  DM.FakturaDB.Filtered := False;
  TLagre.Enabled        := True;

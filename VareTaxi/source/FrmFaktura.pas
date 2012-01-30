@@ -67,6 +67,7 @@ type
     procedure TBNyClick(Sender: TObject);
     procedure FnreditKeyPress(Sender: TObject; var Key: Char);
     procedure Button4Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     procedure OpprettDataRad;
@@ -96,6 +97,7 @@ end;
 
 procedure TFakturaFrm.sbkClick(Sender: TObject);
 begin
+ DM.VisKunAktive(True);
  Application.CreateForm(TVelgFrm, VelgFrm);
  VelgFrm.Caption := 'Velg kunde';
  VelgFrm.Kunde.Visible := True;
@@ -142,6 +144,7 @@ end;
 procedure TFakturaFrm.EndreFaktura;
 begin
  With DM do begin
+  VisKunAktive(False);
   Fnredit.Text                     := FloatToStr(FakturaDBFakturanr.Value);
   KundeDB.Locate('IdKunde', FakturaDBKundeID.Value,[]);
   Knredit.Text                     := FloatToStr(KundeDBKundenr.Value);
@@ -340,6 +343,11 @@ begin
     DM.RundAvTotalSum;
     end;
 end;
+end;
+
+procedure TFakturaFrm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Dm.VisKunAktive(False);
 end;
 
 end.
