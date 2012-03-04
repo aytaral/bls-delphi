@@ -392,9 +392,10 @@ end;
 
 procedure TDm.KoblingDBCalcFields(DataSet: TDataSet);
 begin
-
-  KoblingDBSumEks.Value := (KoblingDBPris.Value - (KoblingDBPris.Value * (KoblingDBRabatt.Value / 100))) * KoblingDBAntall.Value;
-  KoblingDBSumInk.Value := KoblingDBSumEks.Value * (1 + (KoblingDBMva.Value / 100));
+  if (KoblingDBAntall.IsNull = False) then begin
+    KoblingDBSumEks.Value := (KoblingDBPris.Value - (KoblingDBPris.Value * (KoblingDBRabatt.Value / 100))) * KoblingDBAntall.Value;
+    KoblingDBSumInk.Value := KoblingDBSumEks.Value * (1 + (KoblingDBMva.Value / 100));
+  end;
 
 //  DM.KoblingDBSumEks.Value           := (DM.KoblingDBPris.Value - (DM.KoblingDBPris.Value * (DM.KoblingDBRabatt.Value / 100))) * DM.KoblingDBAntall.Value;
 //  DM.KoblingDBSumInk.Value           := DM.KoblingDBSumEks.Value * (1 + (DM.FakturaDBMVASats.Value / 100));

@@ -56,10 +56,10 @@ type
     QRLabel3: TQRLabel;
     qrdbVarenr: TQRDBText;
     QRDBText39: TQRDBText;
-    QRDBText40: TQRDBText;
-    QRDBText41: TQRDBText;
+    QrDBPris: TQRDBText;
+    QrDBAntall: TQRDBText;
     QRDBText42: TQRDBText;
-    QRDBText7: TQRDBText;
+    QrDBEks: TQRDBText;
     ChildBand1: TQRChildBand;
     qrPageFooter: TQRBand;
     QRDBText26: TQRDBText;
@@ -106,6 +106,8 @@ type
     QRDBText34: TQRDBText;
     procedure FakturaRptBeforePrint(Sender: TCustomQuickRep;
       var PrintReport: Boolean);
+    procedure VarelinjeBandBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     procedure ReadVarenrSettings;
 
@@ -179,6 +181,13 @@ begin
   LesMarger(Self);
   ReportTitle := 'Faktura-' + Dm.FakturaDBFakturanr.AsString;
 
+end;
+
+procedure TRptFaktura.VarelinjeBandBeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QrDBPris.Enabled := not Dm.KoblingDBAntall.IsNull;
+  QrDBEks.Enabled := not Dm.KoblingDBAntall.IsNull;
 end;
 
 end.
