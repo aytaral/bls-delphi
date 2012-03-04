@@ -112,6 +112,7 @@ type
     CdsSorteringInnpris: TFloatField;
     CdsSorteringEnhet: TStringField;
     CdsSorteringMva: TFloatField;
+    tbTekst: TToolButton;
     procedure OkFakturaClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure TbNyClick(Sender: TObject);
@@ -146,6 +147,7 @@ type
     procedure Innstillinger1Click(Sender: TObject);
     procedure Forsikring1Click(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
+    procedure tbTekstClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -819,6 +821,21 @@ begin
     Dm.KoblingDB.EnableControls;
     Screen.Cursor := crDefault;
   end;
+end;
+
+procedure TFrmFaktura.tbTekstClick(Sender: TObject);
+begin
+  if DM.KoblingDB.State <> dsInsert then
+    DM.KoblingDB.Append;
+
+  DM.KoblingDBMva.Clear;
+  DM.KoblingDBEnhet.Clear;
+  DM.KoblingDBAntall.Clear;
+  DM.KoblingDBInnPris.Clear;
+  DM.KoblingDBPris.Clear;
+
+  VareGrid.SetFocus;
+  VareGrid.SelectedField := Dm.KoblingDBInfo;
 end;
 
 end.
