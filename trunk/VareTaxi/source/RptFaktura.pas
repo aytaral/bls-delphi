@@ -84,8 +84,13 @@ type
     QRDBText37: TQRDBText;
     QRDBImage1: TQRDBImage;
     QrdbKid: TQRDBText;
+    qrKroner: TQRLabel;
+    qrOre: TQRLabel;
+    qrKontroll: TQRLabel;
     procedure FakturaRptBeforePrint(Sender: TCustomQuickRep;
       var PrintReport: Boolean);
+    procedure QRBand4BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
 
   public
@@ -96,6 +101,8 @@ var
   FakturaRpt: TFakturaRpt;
 
 implementation
+
+uses Std;
 
 {$R *.DFM}
 
@@ -113,6 +120,14 @@ begin
     End;
 
 
+end;
+
+procedure TFakturaRpt.QRBand4BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  qrKroner.Caption := FloatToStr(Int(DM.FakturaDBTotal.Value));
+  qrOre.Caption := Copy(FormatFloat('#.00', Frac(DM.FakturaDBTotal.Value)), 2, 2);
+  qrKontroll.Caption := Std.Modulus10(qrKroner.Caption + qrOre.Caption);
 end;
 
 end.

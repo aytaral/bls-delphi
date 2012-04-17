@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, DBTables, ImgList, Std, IniFiles, blsFileUtil, JclFileUtils, JclSysInfo;
+  Db, DBTables, ImgList, Std, IniFiles, blsFileUtil, JclFileUtils,
+  JclSysInfo, JclStrings;
 
 type
   TDM = class(TDataModule)
@@ -397,10 +398,16 @@ end;
 end;
 
 procedure TDM.FakturaDBCalcFields(DataSet: TDataSet);
-var S:String;
+var
+  S, N: String;
+  L: Integer;
 begin
- S := FakturaDBFakturanr.Text + '000' + FakturaDbKnr.Value;
- FakturaDBKid.Value := S + Std.Modulus10(S);
+  L := Length(FakturaDBFakturanr.Text + FakturaDbKnr.Value);
+  N := '';
+  N := JclStrings.StrPadLeft(N, 14 - L, '0');
+
+  S := FakturaDBFakturanr.Text + N + FakturaDbKnr.Value;
+  FakturaDBKid.Value := S + Std.Modulus10(S);
 end;
 
 procedure TDm.OpenDataSets;

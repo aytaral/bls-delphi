@@ -796,7 +796,7 @@ end;
 
 procedure TMenyFrm.bankeditKeyPress(Sender: TObject; var Key: Char);
 begin
-If not (key in['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '.', #8, #13])
+If not (key in['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '.', ' ', #8, #13])
  then key := #0;
 end;
 
