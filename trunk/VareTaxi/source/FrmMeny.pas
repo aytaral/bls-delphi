@@ -1611,9 +1611,18 @@ begin
   xDoc := EHFExport;
 
   SetInvoiceHeader(Dm.FakturaDBFakturanr.AsString,
-                   'NOK', '', '',
+                   'NOK', '123', '',
                    Dm.FakturaDBFakturaDato.Value,
                    xDoc.DocumentElement);
+
+  SetCompanyInfo(Dm.FirmaDBFirmanavn.AsString,
+                 '', Dm.FirmaDBAdresse.AsString,
+                 Dm.FirmaDBPostSted.AsString,
+                 Dm.FirmaDBPostnr.AsString,
+                 'NO',
+                 Dm.FirmaDBOrganisasjonsnr.AsString,
+                 Dm.FakturaDBVRef.AsString,
+                 xDoc.DocumentElement);
 
   
   xDoc.SaveToFile(Dir + 'EHFInvoice.xml');
