@@ -1102,7 +1102,7 @@ begin
  DM.FakturaDBPurreTotal.Value := DM.FakturaDBTotal.Value + DM.FakturaDBPurreSum.Value;
  DM.FakturaDBForfallsDato.Value := Date + DM.KundeDBForfallsDager.Value;
  DM.FakturaDB.Post;
- DM.RundAvPurreTotal;
+// DM.RundAvPurreTotal;
 end;
 
 procedure TMenyFrm.TVisClick(Sender: TObject);
@@ -1607,10 +1607,12 @@ end;
 procedure TMenyFrm.TEhfClick(Sender: TObject);
 var
   xDoc: IXMLDocument;
+  Mva: IXMLNode;
+  I: Integer;
 begin
   if not Dm.KundeDB.Locate('IdKunde', Dm.FakturaDBKundeID.Value, []) then Exit;
 
-  xDoc := EHFExport;
+  xDoc := EHFInvoiceExport;
 
   SetInvoiceHeader(Dm.FakturaDBFakturanr.AsString,
                    'NOK', '', '',
@@ -1635,6 +1637,39 @@ begin
                   Dm.KundeDBOrganisasjonsnr.AsString,
                   Dm.FakturaDBDRef.AsString,
                   xDoc.DocumentElement);
+
+  SetDeliveryInfo(Dm.FakturaDBFakturaDato.Value,
+                  Dm.KundeDBAdresse.AsString,
+                  Dm.KundeDBPoststed.AsString,
+                  Dm.KundeDBPostnr.AsString,
+                  'NO',
+                  xDoc.DocumentElement);
+
+  SetPaymentInfo(Dm.FakturaDBForfallsDato.Value,
+                 Dm.FakturaDBKid.AsString,
+                 Dm.FirmaDBBankkontonr.AsString,
+                 xDoc.DocumentElement);
+
+  Mva := SetTaxTotalInfo('NOK', Dm.FakturaDBMVA.Value, xDoc.DocumentElement);
+  SetTaxSubTotal('NOK', Dm.FakturaDBMVASats.Value,
+                 Dm.FakturaDBEks.Value,
+                 Dm.FakturaDBMVA.Value,
+                 Mva);
+
+  SetInvoiceTotals('NOK', Dm.FakturaDBEks.Value, Dm.FakturaDBTotal.Value,
+                   xDoc.DocumentElement);
+
+
+  I := 1;
+  Dm.FOrdreDB.First;
+  while not Dm.FOrdreDB.Eof do begin
+    AddLine(I, 'NOK', Dm.FOrdreDBOrdrenr.AsString, 'KM', '',
+      FormatDateTime('yyyy-mm-dd', Dm.FOrdreDBDato.Value) + ': '+ Dm.FOrdreDBKjorerute.AsString,
+      Dm.FOrdreDBKm.Value, Dm.FOrdreDBKmPris.Value, Dm.FakturaDBMVASats.Value,
+      xDoc.DocumentElement);
+    Inc(I);
+    Dm.FOrdreDB.Next;
+  end;
 
   
   xDoc.SaveToFile(Dir + 'EHFInvoice.xml');
