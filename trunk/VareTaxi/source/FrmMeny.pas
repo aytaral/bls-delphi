@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ComCtrls, ToolWin, Menus, ExtCtrls, StdCtrls, DBCtrls, Grids,
   DBGrids, ShellApi, Buttons, Spin, OleCtrls, vcfi, DB, ExtDlgs, Registry,
-  DBTables, Printers, blsDbGridScroll, blsXMLUtil, vtEHFExport;
+  DBTables, Printers,
+  blsDbGridScroll, blsXMLUtil, vtEHFExport, XMLIntf, XmlDoc;
 
 type
   TMenyFrm = class(TForm)
@@ -1604,8 +1605,18 @@ begin
 end;
 
 procedure TMenyFrm.TEhfClick(Sender: TObject);
+var
+  xDoc: IXMLDocument;
 begin
-  vtEHFExport.EHFExport;
+  xDoc := EHFExport;
+
+  SetInvoiceHeader(Dm.FakturaDBFakturanr.AsString,
+                   'NOK', '', '',
+                   Dm.FakturaDBFakturaDato.Value,
+                   xDoc.DocumentElement);
+
+  
+  xDoc.SaveToFile(Dir + 'EHFInvoice.xml');
 end;
 
 end.
