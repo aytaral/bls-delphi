@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, DBTables, ImgList, Std, IniFiles, blsFileUtil, JclFileUtils,
+  Db, DBTables, ImgList, IniFiles, blsFileUtil, JclFileUtils, blsMisc,
   JclSysInfo, JclStrings;
 
 type
@@ -407,7 +407,7 @@ begin
   N := JclStrings.StrPadLeft(N, 14 - L, '0');
 
   S := FakturaDBFakturanr.Text + N + FakturaDbKnr.Value;
-  FakturaDBKid.Value := S + Std.Modulus10(S);
+  FakturaDBKid.Value := S + Modulus10(S);
 end;
 
 procedure TDm.OpenDataSets;

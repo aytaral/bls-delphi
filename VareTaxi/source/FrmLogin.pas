@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Std;
+  StdCtrls, ExtCtrls, blsCrypto;
 
 type
   TLoginFrm = class(TForm)
@@ -63,7 +63,7 @@ begin
 
  try
   K.LoadFromFile(LoginFil);
-  Pass := Std.Dekrypter(K[0]);
+  Pass := Dekrypter(K[0]);
 
  finally
   K.Free;
