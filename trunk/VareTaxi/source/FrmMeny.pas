@@ -1608,10 +1608,12 @@ procedure TMenyFrm.TEhfClick(Sender: TObject);
 var
   xDoc: IXMLDocument;
 begin
+  if not Dm.KundeDB.Locate('IdKunde', Dm.FakturaDBKundeID.Value, []) then Exit;
+
   xDoc := EHFExport;
 
   SetInvoiceHeader(Dm.FakturaDBFakturanr.AsString,
-                   'NOK', '123', '',
+                   'NOK', '', '',
                    Dm.FakturaDBFakturaDato.Value,
                    xDoc.DocumentElement);
 
@@ -1623,6 +1625,16 @@ begin
                  Dm.FirmaDBOrganisasjonsnr.AsString,
                  Dm.FakturaDBVRef.AsString,
                  xDoc.DocumentElement);
+
+  SetCustomerInfo(Dm.KundeDBKundenr.AsString,
+                  Dm.KundeDBFirma.AsString,
+                  Dm.KundeDBAdresse.AsString,
+                  Dm.KundeDBPoststed.AsString,
+                  Dm.KundeDBPostnr.AsString,
+                  'NO',
+                  Dm.KundeDBOrganisasjonsnr.AsString,
+                  Dm.FakturaDBDRef.AsString,
+                  xDoc.DocumentElement);
 
   
   xDoc.SaveToFile(Dir + 'EHFInvoice.xml');

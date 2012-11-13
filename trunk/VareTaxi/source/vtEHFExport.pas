@@ -10,8 +10,9 @@ function EHFExport(): IXMLDocument;
 procedure SetInvoiceHeader(InvoiceNo, Currency, OrderNo, ContractNo: String;
   InvoiceDate: TDateTime; Root: IXMLNode);
 procedure SetCompanyInfo(Name, Postbox, Street, City, PostCode, CountryCode,
-OrgNo, OurRef: String; Root: IXMLNode);
-
+  OrgNo, OurRef: String; Root: IXMLNode);
+procedure SetCustomerInfo(Id, Name, Street, City, PostCode, CountryCode, OrgNo,
+  YourRef: String; Root: IXMLNode);
 
 implementation
 
@@ -53,7 +54,7 @@ begin
 end;
 
 procedure SetCompanyInfo(Name, Postbox, Street, City, PostCode, CountryCode,
-OrgNo, OurRef: String; Root: IXMLNode);
+  OrgNo, OurRef: String; Root: IXMLNode);
 var
   aNode, tNode: IXMLNode;
   FullOrgNo, CompNo: String;
@@ -90,6 +91,36 @@ begin
 
   blsXMLUtil.SetNodeValue('cac:PartyLegalEntity\cbc:CompanyID', CompNo, tNode, False);
   blsXMLUtil.SetNodeValue('cac:Contact\cbc:ID', OurRef, tNode, False);
+end;
+
+procedure SetCustomerInfo(Id, Name, Street, City, PostCode, CountryCode, OrgNo,
+  YourRef: String; Root: IXMLNode);
+var
+  aNode, tNode: IXMLNode;
+  CompNo: String;
+begin
+  tNode := Root.AddChild('cac:AccountingCustomerParty');
+  tNode := tNode.AddChild('cac:Party');
+
+  blsXMLUtil.SetNodeValue('cac:PartyIdentification\cbc:ID', Id, tNode, False);
+  blsXMLUtil.SetNodeValue('cac:PartyName\cbc:Name', Name, tNode, False);
+
+  aNode := tNode.AddChild('cac:PostalAddress');
+  blsXMLUtil.SetNodeValue('cbc:StreetName', Street, aNode, False);
+  //blsXMLUtil.SetNodeValue('cbc:BuildingNumber', '', aNode, False);
+  blsXMLUtil.SetNodeValue('cbc:CityName', City, aNode, False);
+  blsXMLUtil.SetNodeValue('cbc:PostalZone', PostCode, aNode, False);
+  blsXMLUtil.SetNodeValue('cac:Country\cbc:IdentificationCode', CountryCode, aNode, False);
+
+  //Fjerner uønskede elementer fra org no.
+  CompNo := AnsiUpperCase(OrgNo);
+  CompNo := StringReplace(CompNo, '.', '', [rfReplaceAll]);
+  CompNo := StringReplace(CompNo, ' ', '', [rfReplaceAll]);
+  CompNo := StringReplace(CompNo, 'NO', '', []);
+  CompNo := StringReplace(CompNo, 'MVA', '', []);
+
+  blsXMLUtil.SetNodeValue('cac:PartyLegalEntity\cbc:CompanyID', CompNo, tNode, False);
+  blsXMLUtil.SetNodeValue('cac:Contact\cbc:ID', YourRef, tNode, False);
 end;
 
 
