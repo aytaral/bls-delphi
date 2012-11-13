@@ -102,7 +102,7 @@ var
 
 implementation
 
-uses Std;
+uses blsMisc;
 
 {$R *.DFM}
 
@@ -118,8 +118,6 @@ begin
     finally
      Reg.Free;
     End;
-
-
 end;
 
 procedure TFakturaRpt.QRBand4BeforePrint(Sender: TQRCustomBand;
@@ -127,7 +125,7 @@ procedure TFakturaRpt.QRBand4BeforePrint(Sender: TQRCustomBand;
 begin
   qrKroner.Caption := FloatToStr(Int(DM.FakturaDBTotal.Value));
   qrOre.Caption := Copy(FormatFloat('#.00', Frac(DM.FakturaDBTotal.Value)), 2, 2);
-  qrKontroll.Caption := Std.Modulus10(qrKroner.Caption + qrOre.Caption);
+  qrKontroll.Caption := Modulus10(qrKroner.Caption + qrOre.Caption);
 end;
 
 end.

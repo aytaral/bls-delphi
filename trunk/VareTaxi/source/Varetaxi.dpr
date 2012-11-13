@@ -26,7 +26,6 @@ uses
   RptBil in 'RptBil.pas' {BilRpt: TQuickRep},
   Sysutils,
   Windows,
-  Std in '..\..\Standard Modul\Std.pas',
   FrmLogin in 'FrmLogin.pas' {LoginFrm},
   FrmPassord in 'FrmPassord.pas' {PassordFrm},
   FrmBilType in 'FrmBilType.pas' {BilTypeFrm},

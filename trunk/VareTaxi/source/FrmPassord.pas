@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, Std;
+  ExtCtrls, StdCtrls;
 
 type
   TPassordFrm = class(TForm)
@@ -34,7 +34,7 @@ const
 
 implementation
 
-uses DataModul;
+uses DataModul, blsMisc, blsCrypto;
 
 {$R *.DFM}
 
@@ -52,7 +52,7 @@ begin
      //Endre passordet i fila
       K := TStringList.Create;
        try
-        K.Add(Std.Krypter(EditNytt.Text));
+        K.Add(Krypter(EditNytt.Text));
         K.SaveToFile(LoginFil);
        finally
         K.Free;
@@ -80,7 +80,7 @@ begin
   If FileExists(LoginFil) then
    begin
     K.LoadFromFile(LoginFil);
-    Pass := Std.Dekrypter(K[0]);
+    Pass := Dekrypter(K[0]);
    end;
  finally
   K.Free;
