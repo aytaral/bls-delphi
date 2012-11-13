@@ -3,7 +3,7 @@ unit vtEHFExport;
 interface
 
 uses SysUtils, Classes, Windows, Variants, Math,
-  XMLIntf, XmlDoc, blsFileUtil, blsXMLUtil;
+  XMLIntf, XmlDoc, blsFileUtil, blsXMLUtil, IniFiles;
 
 
 function EHFInvoiceExport(): IXMLDocument;
@@ -34,6 +34,7 @@ var
   aNode: IXMLNode;
 begin
   xDoc := blsXMLUtil.CreateXMLDocument('Invoice', 'UTF-8');
+//  xDoc.DOMDocument.appendChild(xDoc.DOMDocument.createProcessingInstruction('xml-stylesheet', 'type="text/xsl" href="EHF-faktura_NO.xslt"'));
 
   xDoc.DocumentElement.Attributes['xsi:schemaLocation'] := 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 UBL-Invoice-2.0.xsd';
   xDoc.DocumentElement.DeclareNamespace('', 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2');
@@ -255,6 +256,23 @@ begin
   DecimalSeparator := OldSep;
 end;
 
+function MapUnitCodes(UnitCode: String): String;
+var
+  Ini: TIniFile;
+begin
+  Ini := TIniFile.Create(Dir + 'EHF.ini');
+  try
+    Result := Ini.ReadString('UnitCodes', AnsiUpperCase(UnitCode), '');
+
+    if Result = '' then
+      Result := AnsiUpperCase(UnitCode)
+    else
+      Result := AnsiUpperCase(UnitCode);
+  finally
+    Ini.Free;
+  end;
+end;
+
 procedure AddLine(LineNo: Integer; Currency, OrderNo, UnitCode, ItemNo,
   ItemText: String; Qty,ItemPrice, MvaPercent: Double; Root: IXMLNode);
 var
@@ -270,7 +288,7 @@ begin
 
   aNode := tNode.AddChild('cbc:InvoicedQuantity');
   if UnitCode <> '' then
-    aNode.Attributes['unitCode'] := UnitCode;
+    aNode.Attributes['unitCode'] := MapUnitCodes(UnitCode);
   aNode.NodeValue := FormatFloat('0.00', Qty);
 
   aNode := tNode.AddChild('cbc:LineExtensionAmount');

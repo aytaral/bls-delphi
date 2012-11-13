@@ -297,6 +297,8 @@ type
     BilDBInAktiv: TBooleanField;
     KundeDBInAktiv: TBooleanField;
     FOrdreDBKmPris: TFloatField;
+    FOrdreDBTimePris: TFloatField;
+    FOrdreDBFastPris: TFloatField;
     procedure FakturaDBCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
