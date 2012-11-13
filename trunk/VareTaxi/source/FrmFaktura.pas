@@ -340,7 +340,7 @@ begin
     DM.FakturaDBMva.Value   := Eks * (DM.FakturaDBMVASats.Value/100) ;
     DM.FakturaDBTotal.Value := Eks + Avg + (Eks * (DM.FakturaDBMVASats.Value/100));
     DM.FakturaDB.Post;
-    DM.RundAvTotalSum;
+//    DM.RundAvTotalSum;
     end;
 end;
 end;
