@@ -7,7 +7,7 @@ uses
   ComCtrls, ToolWin, Menus, ExtCtrls, StdCtrls, DBCtrls, Grids,
   DBGrids, ShellApi, Buttons, Spin, OleCtrls, vcfi, DB, ExtDlgs, Registry,
   DBTables, Printers,
-  blsDbGridScroll, blsXMLUtil, vtEHFExport, XMLIntf, XmlDoc;
+  blsDbGridScroll, blsXMLUtil, vtEHFExport, XMLIntf, XmlDoc, IniFiles;
 
 type
   TMenyFrm = class(TForm)
@@ -375,6 +375,7 @@ type
     procedure ResetBtn;
     procedure LagreDataset(var Tabell: TTable);
     procedure SlettFellesAvtale;
+    function GetExportDir: String;
 
   public
     { Public declarations }
@@ -1604,6 +1605,20 @@ begin
   SjoforGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
+function TMenyFrm.GetExportDir: String;
+var
+  Ini: TIniFile;
+begin
+  Ini := TIniFile.Create(Dir + 'EHF.ini');
+  try
+    Result := Ini.ReadString('General', 'ExportDir', '');
+    if Result = '' then
+      Result := Dir + 'EHF\';
+  finally
+    Ini.Free;
+  end;
+end;
+
 procedure TMenyFrm.TEhfClick(Sender: TObject);
 var
   xDoc: IXMLDocument;
@@ -1663,16 +1678,42 @@ begin
   I := 1;
   Dm.FOrdreDB.First;
   while not Dm.FOrdreDB.Eof do begin
-    AddLine(I, 'NOK', Dm.FOrdreDBOrdrenr.AsString, 'KM', '',
-      FormatDateTime('yyyy-mm-dd', Dm.FOrdreDBDato.Value) + ': '+ Dm.FOrdreDBKjorerute.AsString,
-      Dm.FOrdreDBKm.Value, Dm.FOrdreDBKmPris.Value, Dm.FakturaDBMVASats.Value,
-      xDoc.DocumentElement);
+    //Fastpris avtaler
+    if Dm.FOrdreDBFastPris.Value > 0 then
+      AddLine(I, 'NOK', Dm.FOrdreDBOrdrenr.AsString, 'EA', '',
+        FormatDateTime('yyyy-mm-dd', Dm.FOrdreDBDato.Value) + ': '+ Dm.FOrdreDBKjorerute.AsString,
+        1, Dm.FOrdreDBFastPris.Value, Dm.FakturaDBMVASats.Value,
+        xDoc.DocumentElement);
+
+    //Kilometer pris
+    if Dm.FOrdreDBKm.Value > 0 then
+      AddLine(I, 'NOK', Dm.FOrdreDBOrdrenr.AsString, 'KTM', '',
+        FormatDateTime('yyyy-mm-dd', Dm.FOrdreDBDato.Value) + ': '+ Dm.FOrdreDBKjorerute.AsString,
+        Dm.FOrdreDBKm.Value, Dm.FOrdreDBKmPris.Value, Dm.FakturaDBMVASats.Value,
+        xDoc.DocumentElement);
+
+    //Time pris
+    if Dm.FOrdreDBTimer.Value > 0 then
+      AddLine(I, 'NOK', Dm.FOrdreDBOrdrenr.AsString, 'HUR', '',
+        FormatDateTime('yyyy-mm-dd', Dm.FOrdreDBDato.Value) + ': '+ Dm.FOrdreDBKjorerute.AsString,
+        Dm.FOrdreDBTimer.Value, Dm.FOrdreDBTimePris.Value, Dm.FakturaDBMVASats.Value,
+        xDoc.DocumentElement);
+
+    //Avgifter
+    if Dm.FOrdreDBSumavg.Value > 0 then
+      AddLine(I, 'NOK', Dm.FOrdreDBOrdrenr.AsString, '', '',
+        FormatDateTime('yyyy-mm-dd', Dm.FOrdreDBDato.Value) + ': '+ Dm.FOrdreDBAvgifter.AsString,
+        1, Dm.FOrdreDBSumavg.Value, -1,
+        xDoc.DocumentElement);
+
     Inc(I);
     Dm.FOrdreDB.Next;
   end;
 
-  
-  xDoc.SaveToFile(Dir + 'EHFInvoice.xml');
+  xDoc.SaveToFile(GetExportDir + 'Invoice-' + Dm.FakturaDBFakturanr.AsString + '.xml');
+
+  //Lagrer en kopi av alle exporterte fakturaer
+  xDoc.SaveToFile(Dir + 'EHF\' + 'Invoice-' + Dm.FakturaDBFakturanr.AsString + '.xml');
 end;
 
 end.
