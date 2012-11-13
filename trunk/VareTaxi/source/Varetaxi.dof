@@ -90,7 +90,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=D:\TestSystem\VareTaxi-2011
+OutputDir=D:\TestSystem\VareTaxi-EHF
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -138,6 +138,7 @@ Comments=
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlOutputDirectorry]
-Count=2
-Item0=D:\TestSystem\VareTaxi-2011
-Item1=D:\TestSystem\VareTaxi
+Count=3
+Item0=D:\TestSystem\VareTaxi-EHF
+Item1=D:\TestSystem\VareTaxi-2011
+Item2=D:\TestSystem\VareTaxi

@@ -8,168 +8,186 @@
   resources were bound to the produced executable.
 */
 
-#define QR3Const_SqrSQRTInvalid 64896
-#define QR3Const_SqrInvalidNot 64897
-#define QR3Const_SqrExpUnknownFieldType 64912
-#define QR3Const_SqrExpIllegalCharInNumeric 64913
-#define QR3Const_SqrExpMissing 64914
-#define QR3Const_SqrExpUnknownFunction 64915
-#define QR3Const_SqrExpError 64916
-#define QR3Const_SqrExpRecursive 64917
-#define QR3Const_SqrExpTooManyArgs 64918
-#define QR3Const_SqrExpWrongArguments 64919
-#define QR3Const_SqrExpUnknownType 64920
-#define QR3Const_SqrTrue 64921
-#define QR3Const_SqrFalse 64922
-#define QR3Const_SqrEvalNotPrepared 64923
-#define QR3Const_SqrMissingArgument 64924
-#define QR3Const_SqrConversionError 64925
-#define QR3Const_SqrDivisionByZero 64926
-#define QR3Const_SqrInvalidFormatnumeric 64927
-#define QR3Const_SqrTypeofDesc 64928
-#define QR3Const_SqrNoCircular 64929
-#define QR3Const_SqrUpperDesc 64930
-#define QR3Const_SqrLowerDesc 64931
-#define QR3Const_SqrPrettyDesc 64932
-#define QR3Const_SqrFormatNumericDesc 64933
-#define QR3Const_SqrExpCannotOperator 64934
-#define QR3Const_SqrExpAdd 64935
-#define QR3Const_SqrExpSubtract 64936
-#define QR3Const_SqrExpMultiply 64937
-#define QR3Const_SqrExpDivide 64938
-#define QR3Const_SqrExpBoolean 64939
-#define QR3Const_SqrExpString 64940
-#define QR3Const_SqrExpNumeric 64941
-#define QR3Const_SqrExpDivideByZero 64942
-#define QR3Const_SqrExpOperatorNotCompatible 64943
-#define QR3Const_SqrQRFile 64944
-#define QR3Const_SqrIfDesc 64945
-#define QR3Const_SqrStrDesc 64946
-#define QR3Const_SqrTimeDesc 64947
-#define QR3Const_SqrDateDesc 64948
-#define QR3Const_SqrSumDesc 64949
-#define QR3Const_SqrCopyDesc 64950
-#define QR3Const_SqrDivDesc 64951
-#define QR3Const_SqrCountDesc 64952
-#define QR3Const_SqrMaxDesc 64953
-#define QR3Const_SqrMinDesc 64954
-#define QR3Const_SqrAverageDesc 64955
-#define QR3Const_SqrBoolDesc 64956
-#define QR3Const_SqrIntDesc 64957
-#define QR3Const_SqrFracDesc 64958
-#define QR3Const_SqrSqrtDesc 64959
-#define QR3Const_SqrLoadReport 64960
-#define QR3Const_SqrPage 64961
-#define QR3Const_SqrOf 64962
-#define QR3Const_SqrIllegalNewPage 64963
-#define QR3Const_SqrQRPrinterNotReady 64964
-#define QR3Const_SqrTime 64965
-#define QR3Const_SqrDate 64966
-#define QR3Const_SqrDateTime 64967
-#define QR3Const_SqrPageNum 64968
-#define QR3Const_SqrReportTitle 64969
-#define QR3Const_SqrDetailCount 64970
-#define QR3Const_SqrDetailNo 64971
-#define QR3Const_SqrQuSoft 64972
-#define QR3Const_SqrNone 64973
-#define QR3Const_SqrFileNotExist 64974
-#define QR3Const_SqrCompleted 64975
-#define QR3Const_SqrSubDetail 64976
-#define QR3Const_SqrColumnHeader 64977
-#define QR3Const_SqrOverlay 64978
-#define QR3Const_SqrChild 64979
-#define QR3Const_SqrTitleBandName 64980
-#define QR3Const_SqrPageHeaderBandName 64981
-#define QR3Const_SqrDetailBandName 64982
-#define QR3Const_SqrPageFooterBandName 64983
-#define QR3Const_SqrSummaryBandName 64984
-#define QR3Const_SqrGroupHeaderBandName 64985
-#define QR3Const_SqrGroupFooterBandName 64986
-#define QR3Const_SqrSubDetailBandName 64987
-#define QR3Const_SqrColumnHeaderBandName 64988
-#define QR3Const_SqrOverlayBandName 64989
-#define QR3Const_SqrChildBandName 64990
-#define QR3Const_SqrSaveReport 64991
-#define QR3Const_SqrPaperSize19 64992
-#define QR3Const_SqrPaperSize20 64993
-#define QR3Const_SqrPaperSize21 64994
-#define QR3Const_SqrPaperSize22 64995
-#define QR3Const_SqrPaperSize23 64996
-#define QR3Const_SqrPaperSize24 64997
-#define QR3Const_SqrPaperSize25 64998
-#define QR3Const_SqrPaperSize26 64999
-#define QR3Const_SqrPaperSize27 65000
-#define QR3Const_SqrTitle 65001
-#define QR3Const_SqrPageHeader 65002
-#define QR3Const_SqrDetail 65003
-#define QR3Const_SqrPageFooter 65004
-#define QR3Const_SqrSummary 65005
-#define QR3Const_SqrGroupHeader 65006
-#define QR3Const_SqrGroupFooter 65007
-#define QR3Const_SqrPaperSize3 65008
-#define QR3Const_SqrPaperSize4 65009
-#define QR3Const_SqrPaperSize5 65010
-#define QR3Const_SqrPaperSize6 65011
-#define QR3Const_SqrPaperSize7 65012
-#define QR3Const_SqrPaperSize8 65013
-#define QR3Const_SqrPaperSize9 65014
-#define QR3Const_SqrPaperSize10 65015
-#define QR3Const_SqrPaperSize11 65016
-#define QR3Const_SqrPaperSize12 65017
-#define QR3Const_SqrPaperSize13 65018
-#define QR3Const_SqrPaperSize14 65019
-#define QR3Const_SqrPaperSize15 65020
-#define QR3Const_SqrPaperSize16 65021
-#define QR3Const_SqrPaperSize17 65022
-#define QR3Const_SqrPaperSize18 65023
-#define JclResources_RsIntelCacheDescr7C 65024
-#define JclResources_RsIntelCacheDescr7D 65025
-#define JclResources_RsIntelCacheDescr7F 65026
-#define JclResources_RsIntelCacheDescr82 65027
-#define JclResources_RsIntelCacheDescr83 65028
-#define JclResources_RsIntelCacheDescr84 65029
-#define JclResources_RsIntelCacheDescr85 65030
-#define JclResources_RsIntelCacheDescr86 65031
-#define JclResources_RsIntelCacheDescr87 65032
-#define JclResources_RsIntelCacheDescrB0 65033
-#define JclResources_RsIntelCacheDescrB3 65034
-#define JclResources_RsIntelCacheDescrF0 65035
-#define JclResources_RsIntelCacheDescrF1 65036
-#define QR3Const_SqrPaperSize0 65037
-#define QR3Const_SqrPaperSize1 65038
-#define QR3Const_SqrPaperSize2 65039
-#define JclResources_RsIntelCacheDescr51 65040
-#define JclResources_RsIntelCacheDescr52 65041
-#define JclResources_RsIntelCacheDescr5B 65042
-#define JclResources_RsIntelCacheDescr5C 65043
-#define JclResources_RsIntelCacheDescr5D 65044
-#define JclResources_RsIntelCacheDescr60 65045
-#define JclResources_RsIntelCacheDescr66 65046
-#define JclResources_RsIntelCacheDescr67 65047
-#define JclResources_RsIntelCacheDescr68 65048
-#define JclResources_RsIntelCacheDescr70 65049
-#define JclResources_RsIntelCacheDescr71 65050
-#define JclResources_RsIntelCacheDescr72 65051
-#define JclResources_RsIntelCacheDescr78 65052
-#define JclResources_RsIntelCacheDescr79 65053
-#define JclResources_RsIntelCacheDescr7A 65054
-#define JclResources_RsIntelCacheDescr7B 65055
-#define JclResources_RsIntelCacheDescr08 65056
-#define JclResources_RsIntelCacheDescr0A 65057
-#define JclResources_RsIntelCacheDescr0C 65058
-#define JclResources_RsIntelCacheDescr22 65059
-#define JclResources_RsIntelCacheDescr23 65060
-#define JclResources_RsIntelCacheDescr25 65061
-#define JclResources_RsIntelCacheDescr29 65062
-#define JclResources_RsIntelCacheDescr2C 65063
-#define JclResources_RsIntelCacheDescr30 65064
-#define JclResources_RsIntelCacheDescr40 65065
-#define JclResources_RsIntelCacheDescr41 65066
-#define JclResources_RsIntelCacheDescr42 65067
-#define JclResources_RsIntelCacheDescr43 65068
-#define JclResources_RsIntelCacheDescr44 65069
-#define JclResources_RsIntelCacheDescr45 65070
-#define JclResources_RsIntelCacheDescr50 65071
+#define QR3Const_SqrDivisionByZero 64880
+#define QR3Const_SqrInvalidFormatnumeric 64881
+#define QR3Const_SqrSQRTInvalid 64882
+#define QR3Const_SqrInvalidNot 64883
+#define QR3Const_SqrExpDivideByZero 64896
+#define QR3Const_SqrExpOperatorNotCompatible 64897
+#define QR3Const_SqrExpUnknownFieldType 64898
+#define QR3Const_SqrExpIllegalCharInNumeric 64899
+#define QR3Const_SqrExpMissing 64900
+#define QR3Const_SqrExpUnknownFunction 64901
+#define QR3Const_SqrExpError 64902
+#define QR3Const_SqrExpRecursive 64903
+#define QR3Const_SqrExpTooManyArgs 64904
+#define QR3Const_SqrExpWrongArguments 64905
+#define QR3Const_SqrExpUnknownType 64906
+#define QR3Const_SqrTrue 64907
+#define QR3Const_SqrFalse 64908
+#define QR3Const_SqrEvalNotPrepared 64909
+#define QR3Const_SqrMissingArgument 64910
+#define QR3Const_SqrConversionError 64911
+#define QR3Const_SqrFracDesc 64912
+#define QR3Const_SqrSqrtDesc 64913
+#define QR3Const_SqrTypeofDesc 64914
+#define QR3Const_SqrNoCircular 64915
+#define QR3Const_SqrUpperDesc 64916
+#define QR3Const_SqrLowerDesc 64917
+#define QR3Const_SqrPrettyDesc 64918
+#define QR3Const_SqrFormatNumericDesc 64919
+#define QR3Const_SqrExpCannotOperator 64920
+#define QR3Const_SqrExpAdd 64921
+#define QR3Const_SqrExpSubtract 64922
+#define QR3Const_SqrExpMultiply 64923
+#define QR3Const_SqrExpDivide 64924
+#define QR3Const_SqrExpBoolean 64925
+#define QR3Const_SqrExpString 64926
+#define QR3Const_SqrExpNumeric 64927
+#define QR3Const_SqrFileNotExist 64928
+#define QR3Const_SqrCompleted 64929
+#define QR3Const_SqrQRFile 64930
+#define QR3Const_SqrIfDesc 64931
+#define QR3Const_SqrStrDesc 64932
+#define QR3Const_SqrTimeDesc 64933
+#define QR3Const_SqrDateDesc 64934
+#define QR3Const_SqrSumDesc 64935
+#define QR3Const_SqrCopyDesc 64936
+#define QR3Const_SqrDivDesc 64937
+#define QR3Const_SqrCountDesc 64938
+#define QR3Const_SqrMaxDesc 64939
+#define QR3Const_SqrMinDesc 64940
+#define QR3Const_SqrAverageDesc 64941
+#define QR3Const_SqrBoolDesc 64942
+#define QR3Const_SqrIntDesc 64943
+#define QR3Const_SqrChildBandName 64944
+#define QR3Const_SqrSaveReport 64945
+#define QR3Const_SqrLoadReport 64946
+#define QR3Const_SqrPage 64947
+#define QR3Const_SqrOf 64948
+#define QR3Const_SqrIllegalNewPage 64949
+#define QR3Const_SqrQRPrinterNotReady 64950
+#define QR3Const_SqrTime 64951
+#define QR3Const_SqrDate 64952
+#define QR3Const_SqrDateTime 64953
+#define QR3Const_SqrPageNum 64954
+#define QR3Const_SqrReportTitle 64955
+#define QR3Const_SqrDetailCount 64956
+#define QR3Const_SqrDetailNo 64957
+#define QR3Const_SqrQuSoft 64958
+#define QR3Const_SqrNone 64959
+#define QR3Const_SqrGroupHeader 64960
+#define QR3Const_SqrGroupFooter 64961
+#define QR3Const_SqrSubDetail 64962
+#define QR3Const_SqrColumnHeader 64963
+#define QR3Const_SqrOverlay 64964
+#define QR3Const_SqrChild 64965
+#define QR3Const_SqrTitleBandName 64966
+#define QR3Const_SqrPageHeaderBandName 64967
+#define QR3Const_SqrDetailBandName 64968
+#define QR3Const_SqrPageFooterBandName 64969
+#define QR3Const_SqrSummaryBandName 64970
+#define QR3Const_SqrGroupHeaderBandName 64971
+#define QR3Const_SqrGroupFooterBandName 64972
+#define QR3Const_SqrSubDetailBandName 64973
+#define QR3Const_SqrColumnHeaderBandName 64974
+#define QR3Const_SqrOverlayBandName 64975
+#define QR3Const_SqrPaperSize17 64976
+#define QR3Const_SqrPaperSize18 64977
+#define QR3Const_SqrPaperSize19 64978
+#define QR3Const_SqrPaperSize20 64979
+#define QR3Const_SqrPaperSize21 64980
+#define QR3Const_SqrPaperSize22 64981
+#define QR3Const_SqrPaperSize23 64982
+#define QR3Const_SqrPaperSize24 64983
+#define QR3Const_SqrPaperSize25 64984
+#define QR3Const_SqrPaperSize26 64985
+#define QR3Const_SqrPaperSize27 64986
+#define QR3Const_SqrTitle 64987
+#define QR3Const_SqrPageHeader 64988
+#define QR3Const_SqrDetail 64989
+#define QR3Const_SqrPageFooter 64990
+#define QR3Const_SqrSummary 64991
+#define QR3Const_SqrPaperSize1 64992
+#define QR3Const_SqrPaperSize2 64993
+#define QR3Const_SqrPaperSize3 64994
+#define QR3Const_SqrPaperSize4 64995
+#define QR3Const_SqrPaperSize5 64996
+#define QR3Const_SqrPaperSize6 64997
+#define QR3Const_SqrPaperSize7 64998
+#define QR3Const_SqrPaperSize8 64999
+#define QR3Const_SqrPaperSize9 65000
+#define QR3Const_SqrPaperSize10 65001
+#define QR3Const_SqrPaperSize11 65002
+#define QR3Const_SqrPaperSize12 65003
+#define QR3Const_SqrPaperSize13 65004
+#define QR3Const_SqrPaperSize14 65005
+#define QR3Const_SqrPaperSize15 65006
+#define QR3Const_SqrPaperSize16 65007
+#define JclResources_RsIntelCacheDescr7A 65008
+#define JclResources_RsIntelCacheDescr7B 65009
+#define JclResources_RsIntelCacheDescr7C 65010
+#define JclResources_RsIntelCacheDescr7D 65011
+#define JclResources_RsIntelCacheDescr7F 65012
+#define JclResources_RsIntelCacheDescr82 65013
+#define JclResources_RsIntelCacheDescr83 65014
+#define JclResources_RsIntelCacheDescr84 65015
+#define JclResources_RsIntelCacheDescr85 65016
+#define JclResources_RsIntelCacheDescr86 65017
+#define JclResources_RsIntelCacheDescr87 65018
+#define JclResources_RsIntelCacheDescrB0 65019
+#define JclResources_RsIntelCacheDescrB3 65020
+#define JclResources_RsIntelCacheDescrF0 65021
+#define JclResources_RsIntelCacheDescrF1 65022
+#define QR3Const_SqrPaperSize0 65023
+#define JclResources_RsIntelCacheDescr45 65024
+#define JclResources_RsIntelCacheDescr50 65025
+#define JclResources_RsIntelCacheDescr51 65026
+#define JclResources_RsIntelCacheDescr52 65027
+#define JclResources_RsIntelCacheDescr5B 65028
+#define JclResources_RsIntelCacheDescr5C 65029
+#define JclResources_RsIntelCacheDescr5D 65030
+#define JclResources_RsIntelCacheDescr60 65031
+#define JclResources_RsIntelCacheDescr66 65032
+#define JclResources_RsIntelCacheDescr67 65033
+#define JclResources_RsIntelCacheDescr68 65034
+#define JclResources_RsIntelCacheDescr70 65035
+#define JclResources_RsIntelCacheDescr71 65036
+#define JclResources_RsIntelCacheDescr72 65037
+#define JclResources_RsIntelCacheDescr78 65038
+#define JclResources_RsIntelCacheDescr79 65039
+#define JclResources_RsIntelCacheDescr04 65040
+#define JclResources_RsIntelCacheDescr06 65041
+#define JclResources_RsIntelCacheDescr08 65042
+#define JclResources_RsIntelCacheDescr0A 65043
+#define JclResources_RsIntelCacheDescr0C 65044
+#define JclResources_RsIntelCacheDescr22 65045
+#define JclResources_RsIntelCacheDescr23 65046
+#define JclResources_RsIntelCacheDescr25 65047
+#define JclResources_RsIntelCacheDescr29 65048
+#define JclResources_RsIntelCacheDescr2C 65049
+#define JclResources_RsIntelCacheDescr30 65050
+#define JclResources_RsIntelCacheDescr40 65051
+#define JclResources_RsIntelCacheDescr41 65052
+#define JclResources_RsIntelCacheDescr42 65053
+#define JclResources_RsIntelCacheDescr43 65054
+#define JclResources_RsIntelCacheDescr44 65055
+#define XMLConst_SNodeNotFound 65056
+#define XMLConst_SMissingNode 65057
+#define XMLConst_SNoAttributes 65058
+#define XMLConst_SInvalidNodeType 65059
+#define XMLConst_SMismatchedRegItems 65060
+#define XMLConst_SNotSingleTextNode 65061
+#define XMLConst_SNoDOMParseOptions 65062
+#define XMLConst_SNodeReadOnly 65063
+#define XMLConst_SNoRefresh 65064
+#define XMLConst_SMissingFileName 65065
+#define XMLConst_SLine 65066
+#define JclResources_RsCannotCreateDir 65067
+#define JclResources_RsIntelCacheDescr00 65068
+#define JclResources_RsIntelCacheDescr01 65069
+#define JclResources_RsIntelCacheDescr02 65070
+#define JclResources_RsIntelCacheDescr03 65071
 #define bdeconst_SBDEError 65072
 #define bdeconst_SIndexDoesNotExist 65073
 #define bdeconst_SNoTableName 65074
@@ -179,13 +197,13 @@
 #define bdeconst_SNoFieldAccess 65078
 #define bdeconst_SUntitled 65079
 #define bdeconst_SLocalTransDirty 65080
-#define JclResources_RsCannotCreateDir 65081
-#define JclResources_RsIntelCacheDescr00 65082
-#define JclResources_RsIntelCacheDescr01 65083
-#define JclResources_RsIntelCacheDescr02 65084
-#define JclResources_RsIntelCacheDescr03 65085
-#define JclResources_RsIntelCacheDescr04 65086
-#define JclResources_RsIntelCacheDescr06 65087
+#define XMLConst_SDuplicateRegistration 65081
+#define XMLConst_SNoMatchingDOMVendor 65082
+#define XMLConst_SNoDOMNodeEx 65083
+#define XMLConst_SDOMNotSupported 65084
+#define XMLConst_SNodeExpected 65085
+#define XMLConst_SMSDOMNotInstalled 65086
+#define XMLConst_SNotActive 65087
 #define bdeconst_SDuplicateDatabaseName 65088
 #define bdeconst_SDuplicateSessionName 65089
 #define bdeconst_SInvalidSessionName 65090
@@ -636,8 +654,12 @@
 #define SysConst_SDiskFull 65535
 STRINGTABLE
 BEGIN
+	QR3Const_SqrDivisionByZero,	"Division by Zero"
+	QR3Const_SqrInvalidFormatnumeric,	"Invalid format or value specified"
 	QR3Const_SqrSQRTInvalid,	"Invalid argument to SQRT function"
 	QR3Const_SqrInvalidNot,	"Invalid use of NOT"
+	QR3Const_SqrExpDivideByZero,	"Cannot divide by 0"
+	QR3Const_SqrExpOperatorNotCompatible,	"Operator %s is not compatible with %s expressions"
 	QR3Const_SqrExpUnknownFieldType,	"Field %s is of unknown type"
 	QR3Const_SqrExpIllegalCharInNumeric,	"Illegal character in numeric contant \"%s\""
 	QR3Const_SqrExpMissing,	"Missing %s"
@@ -652,8 +674,8 @@ BEGIN
 	QR3Const_SqrEvalNotPrepared,	"Evaluator not prepared"
 	QR3Const_SqrMissingArgument,	"Missing argument for %s"
 	QR3Const_SqrConversionError,	"Conversion error"
-	QR3Const_SqrDivisionByZero,	"Division by Zero"
-	QR3Const_SqrInvalidFormatnumeric,	"Invalid format or value specified"
+	QR3Const_SqrFracDesc,	"Returns the fractional part of <X>"
+	QR3Const_SqrSqrtDesc,	"Returns square root of <X>"
 	QR3Const_SqrTypeofDesc,	"Returns the data type of <Exp>"
 	QR3Const_SqrNoCircular,	"Circular linking not allowed"
 	QR3Const_SqrUpperDesc,	"Converts a string to upper case letters"
@@ -668,8 +690,8 @@ BEGIN
 	QR3Const_SqrExpBoolean,	"boolean"
 	QR3Const_SqrExpString,	"string"
 	QR3Const_SqrExpNumeric,	"numeric"
-	QR3Const_SqrExpDivideByZero,	"Cannot divide by 0"
-	QR3Const_SqrExpOperatorNotCompatible,	"Operator %s is not compatible with %s expressions"
+	QR3Const_SqrFileNotExist,	"File does not exist"
+	QR3Const_SqrCompleted,	" Completed"
 	QR3Const_SqrQRFile,	"QuickReport file"
 	QR3Const_SqrIfDesc,	"Returns <X> or <Y> depending on the boolean expression <Exp>"
 	QR3Const_SqrStrDesc,	"Convert a numeric <X> to a string"
@@ -684,8 +706,8 @@ BEGIN
 	QR3Const_SqrAverageDesc,	"Returns the average of numeric <X>"
 	QR3Const_SqrBoolDesc,	"boolean value"
 	QR3Const_SqrIntDesc,	"Returns the integer part of <X>"
-	QR3Const_SqrFracDesc,	"Returns the fractional part of <X>"
-	QR3Const_SqrSqrtDesc,	"Returns square root of <X>"
+	QR3Const_SqrChildBandName,	"ChildBand"
+	QR3Const_SqrSaveReport,	"Save report"
 	QR3Const_SqrLoadReport,	"Load report"
 	QR3Const_SqrPage,	"Page"
 	QR3Const_SqrOf,	"of"
@@ -700,8 +722,8 @@ BEGIN
 	QR3Const_SqrDetailNo,	"Detail no"
 	QR3Const_SqrQuSoft,	"QuSoft AS"
 	QR3Const_SqrNone,	"none"
-	QR3Const_SqrFileNotExist,	"File does not exist"
-	QR3Const_SqrCompleted,	" Completed"
+	QR3Const_SqrGroupHeader,	"Group Header"
+	QR3Const_SqrGroupFooter,	"Group Footer"
 	QR3Const_SqrSubDetail,	"Sub Detail"
 	QR3Const_SqrColumnHeader,	"Column Header"
 	QR3Const_SqrOverlay,	"Overlay"
@@ -716,8 +738,8 @@ BEGIN
 	QR3Const_SqrSubDetailBandName,	"SubDetailBand"
 	QR3Const_SqrColumnHeaderBandName,	"ColumnHeaderBand"
 	QR3Const_SqrOverlayBandName,	"OverlayBand"
-	QR3Const_SqrChildBandName,	"ChildBand"
-	QR3Const_SqrSaveReport,	"Save report"
+	QR3Const_SqrPaperSize17,	"11x17 in"
+	QR3Const_SqrPaperSize18,	"Note 8 1/2 x 11 in"
 	QR3Const_SqrPaperSize19,	"Envelope #9 3 7/8 x 8 7/8"
 	QR3Const_SqrPaperSize20,	"Envelope #10 4 1/8 x 9 1/2"
 	QR3Const_SqrPaperSize21,	"Envelope #11 4 1/2 x 10 3/8"
@@ -732,8 +754,8 @@ BEGIN
 	QR3Const_SqrDetail,	"Detail"
 	QR3Const_SqrPageFooter,	"Page Footer"
 	QR3Const_SqrSummary,	"Summary"
-	QR3Const_SqrGroupHeader,	"Group Header"
-	QR3Const_SqrGroupFooter,	"Group Footer"
+	QR3Const_SqrPaperSize1,	"Letter 8 1/2 x 11 in"
+	QR3Const_SqrPaperSize2,	"Letter Small 8 1/2 x 11 in"
 	QR3Const_SqrPaperSize3,	"Tabloid 11 x 17 in"
 	QR3Const_SqrPaperSize4,	"Ledger 17 x 11 in"
 	QR3Const_SqrPaperSize5,	"Legal 8 1/2 x 14 in"
@@ -748,8 +770,8 @@ BEGIN
 	QR3Const_SqrPaperSize14,	"Folio 8 1/2 x 13 in"
 	QR3Const_SqrPaperSize15,	"Quarto 215 x 275 mm"
 	QR3Const_SqrPaperSize16,	"10x14 in"
-	QR3Const_SqrPaperSize17,	"11x17 in"
-	QR3Const_SqrPaperSize18,	"Note 8 1/2 x 11 in"
+	JclResources_RsIntelCacheDescr7A,	"2° Level cache, 256 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
+	JclResources_RsIntelCacheDescr7B,	"2° Level cache, 512 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
 	JclResources_RsIntelCacheDescr7C,	"2° Level cache, 1 MBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
 	JclResources_RsIntelCacheDescr7D,	"2° Level cache, 2 MByte, 8-way set associative, 64byte line size"
 	JclResources_RsIntelCacheDescr7F,	"2° Level cache, 512 KByte, 2-way set associative, 64-byte line size"
@@ -764,8 +786,8 @@ BEGIN
 	JclResources_RsIntelCacheDescrF0,	"64-Byte Prefetching"
 	JclResources_RsIntelCacheDescrF1,	"128-Byte Prefetching"
 	QR3Const_SqrPaperSize0,	"Default size"
-	QR3Const_SqrPaperSize1,	"Letter 8 1/2 x 11 in"
-	QR3Const_SqrPaperSize2,	"Letter Small 8 1/2 x 11 in"
+	JclResources_RsIntelCacheDescr45,	"Unified cache, 32 byte cache line, 4-way set associative, 2Mb"
+	JclResources_RsIntelCacheDescr50,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 64 Entries"
 	JclResources_RsIntelCacheDescr51,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 128 Entries"
 	JclResources_RsIntelCacheDescr52,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 256 Entries"
 	JclResources_RsIntelCacheDescr5B,	"Data TLB, 4 KBytes and 4 MBytes pages, 64 Entries"
@@ -780,8 +802,8 @@ BEGIN
 	JclResources_RsIntelCacheDescr72,	"Trace cache, 32 KµOps, 8-way set associative"
 	JclResources_RsIntelCacheDescr78,	"2° Level cache, 1 MBytes, 4-way set associative, 64 Bytes line size"
 	JclResources_RsIntelCacheDescr79,	"2° Level cache, 128 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
-	JclResources_RsIntelCacheDescr7A,	"2° Level cache, 256 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
-	JclResources_RsIntelCacheDescr7B,	"2° Level cache, 512 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
+	JclResources_RsIntelCacheDescr04,	"Data TLB, 4Mb pages, 4-way set associative, 8 entries"
+	JclResources_RsIntelCacheDescr06,	"8KB instruction cache, 4-way set associative, 32 byte line size"
 	JclResources_RsIntelCacheDescr08,	"16KB instruction cache, 4-way set associative, 32 byte line size"
 	JclResources_RsIntelCacheDescr0A,	"8KB data cache 2-way set associative, 32 byte line size"
 	JclResources_RsIntelCacheDescr0C,	"16KB data cache, 4-way set associative, 32 byte line size"
@@ -796,8 +818,22 @@ BEGIN
 	JclResources_RsIntelCacheDescr42,	"Unified cache, 32 byte cache line, 4-way set associative, 256Kb"
 	JclResources_RsIntelCacheDescr43,	"Unified cache, 32 byte cache line, 4-way set associative, 512Kb"
 	JclResources_RsIntelCacheDescr44,	"Unified cache, 32 byte cache line, 4-way set associative, 1Mb"
-	JclResources_RsIntelCacheDescr45,	"Unified cache, 32 byte cache line, 4-way set associative, 2Mb"
-	JclResources_RsIntelCacheDescr50,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 64 Entries"
+	XMLConst_SNodeNotFound,	"Node \"%s\" not found"
+	XMLConst_SMissingNode,	"IDOMNode required"
+	XMLConst_SNoAttributes,	"Attributes are not supported on this node type"
+	XMLConst_SInvalidNodeType,	"Invalid node type"
+	XMLConst_SMismatchedRegItems,	"Mismatched paramaters to RegisterChildNodes"
+	XMLConst_SNotSingleTextNode,	"Element does not contain a single text node"
+	XMLConst_SNoDOMParseOptions,	"DOM Implementation does not support IDOMParseOptions"
+	XMLConst_SNodeReadOnly,	"Node is readonly"
+	XMLConst_SNoRefresh,	"Refresh is only supported if the FileName or XML properties are set"
+	XMLConst_SMissingFileName,	"FileName cannot be blank"
+	XMLConst_SLine,	"Line"
+	JclResources_RsCannotCreateDir,	"Unable to create directory"
+	JclResources_RsIntelCacheDescr00,	"Null descriptor"
+	JclResources_RsIntelCacheDescr01,	"Instruction TLB, 4Kb pages, 4-way set associative, 32 entries"
+	JclResources_RsIntelCacheDescr02,	"Instruction TLB, 4Mb pages, fully associative, 2 entries"
+	JclResources_RsIntelCacheDescr03,	"Data TLB, 4Kb pages, 4-way set associative, 64 entries"
 	bdeconst_SBDEError,	"BDE error $%.4x"
 	bdeconst_SIndexDoesNotExist,	"Index does not exist. Index: %s"
 	bdeconst_SNoTableName,	"Missing TableName property"
@@ -807,13 +843,13 @@ BEGIN
 	bdeconst_SNoFieldAccess,	"Cannot access field '%s' in a filter"
 	bdeconst_SUntitled,	"Untitled Application"
 	bdeconst_SLocalTransDirty,	"The transaction isolation level must be dirty read for local databases"
-	JclResources_RsCannotCreateDir,	"Unable to create directory"
-	JclResources_RsIntelCacheDescr00,	"Null descriptor"
-	JclResources_RsIntelCacheDescr01,	"Instruction TLB, 4Kb pages, 4-way set associative, 32 entries"
-	JclResources_RsIntelCacheDescr02,	"Instruction TLB, 4Mb pages, fully associative, 2 entries"
-	JclResources_RsIntelCacheDescr03,	"Data TLB, 4Kb pages, 4-way set associative, 64 entries"
-	JclResources_RsIntelCacheDescr04,	"Data TLB, 4Mb pages, 4-way set associative, 8 entries"
-	JclResources_RsIntelCacheDescr06,	"8KB instruction cache, 4-way set associative, 32 byte line size"
+	XMLConst_SDuplicateRegistration,	"\"%s\" DOMImplementation already registered"
+	XMLConst_SNoMatchingDOMVendor,	"No matching DOM Vendor: \"%s\""
+	XMLConst_SNoDOMNodeEx,	"Selected DOM Vendor does not support this property or method"
+	XMLConst_SDOMNotSupported,	"Property or Method \"%s\" is not supported by DOM Vendor \"%s\""
+	XMLConst_SNodeExpected,	"Node cannot be null"
+	XMLConst_SMSDOMNotInstalled,	"Microsoft MSXML is not installed"
+	XMLConst_SNotActive,	"No active document"
 	bdeconst_SDuplicateDatabaseName,	"Duplicate database name '%s'"
 	bdeconst_SDuplicateSessionName,	"Duplicate session name '%s'"
 	bdeconst_SInvalidSessionName,	"Invalid session name %s"
