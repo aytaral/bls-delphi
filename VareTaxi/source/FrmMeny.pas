@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ComCtrls, ToolWin, Menus, ExtCtrls, StdCtrls, DBCtrls, Grids,
   DBGrids, ShellApi, Buttons, Spin, OleCtrls, vcfi, DB, ExtDlgs, Registry,
-  DBTables, Printers, blsDbGridScroll;
+  DBTables, Printers, blsDbGridScroll, blsXMLUtil, vtEHFExport;
 
 type
   TMenyFrm = class(TForm)
@@ -289,6 +289,7 @@ type
     Slettavtale1: TMenuItem;
     popGrid: TPopupMenu;
     popVisInAktive: TMenuItem;
+    TEhf: TToolButton;
     procedure Om2Click(Sender: TObject);
     procedure Postadresser1Click(Sender: TObject);
     procedure TLagreClick(Sender: TObject);
@@ -356,6 +357,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure SjoforGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure TEhfClick(Sender: TObject);
   private
     { Private declarations }
     procedure SlettKunde;
@@ -1599,6 +1601,11 @@ begin
   if DM.SjoforDBInAktiv.Value then
     SjoforGrid.Canvas.Font.Color := clRed;
   SjoforGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TMenyFrm.TEhfClick(Sender: TObject);
+begin
+  vtEHFExport.EHFExport;
 end;
 
 end.

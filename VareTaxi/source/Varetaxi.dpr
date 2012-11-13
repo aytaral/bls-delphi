@@ -32,7 +32,8 @@ uses
   vtNyVerdi in 'vtNyVerdi.pas' {frmNyVerdi},
   vtPrint in 'vtPrint.pas' {frmPrint},
   vtFastAvtale in 'vtFastAvtale.pas' {frmFastAvtale},
-  vtFastAvtaleSok in 'vtFastAvtaleSok.pas' {frmFastAvtaleSok};
+  vtFastAvtaleSok in 'vtFastAvtaleSok.pas' {frmFastAvtaleSok},
+  vtEHFExport in 'vtEHFExport.pas';
 
 {$R *.RES}
 
