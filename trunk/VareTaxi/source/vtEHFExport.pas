@@ -170,6 +170,7 @@ procedure SetPaymentInfo(DueDate: TDateTime; KID: String; AccountNo: String;
   Root: IXMLNode);
 var
   tNode: IXMLNode;
+  ANo: String;
 begin
   tNode := Root.AddChild('cac:PaymentMeans');
   blsXMLUtil.SetNodeValue('cbc:PaymentMeansCode', '31', tNode, False);  //31 = Faktura, 30 = Kreditnota
@@ -179,7 +180,10 @@ begin
   tNode := tNode.AddChild('cac:PayeeFinancialAccount');
   tNode := tNode.AddChild('cbc:ID');
   tNode.Attributes['schemeID'] := 'BBAN'; //BBAN = Kontonr, IBAN = Swift kode
-  tNode.NodeValue := AccountNo;
+
+  ANo := StringReplace(AccountNo, '.', '', [rfReplaceAll]);
+  ANo := StringReplace(ANo, ' ', '', [rfReplaceAll]);
+  tNode.NodeValue := ANo;
 end;
 
 function SetTaxTotalInfo(Currency: String; Mva: Double; Root: IXMLNode): IXMLNode;
