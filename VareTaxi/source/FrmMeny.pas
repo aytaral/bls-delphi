@@ -1312,6 +1312,7 @@ begin
  Skrivut1.Enabled := False;
  TVis.Enabled     := False;
  Vis2.Enabled     := False;
+ TEhf.Enabled     := False;
  end;
 
  1: begin
@@ -1320,6 +1321,7 @@ begin
  DM.FakturaDB.Filtered := False;
  TLagre.Enabled        := True;
  Lagre1.Enabled        := True;
+ TEhf.Enabled          := True;
  end;
 
  2: begin
@@ -1329,6 +1331,7 @@ begin
  Skrivut1.Enabled := False;
  TVis.Enabled     := False;
  Vis2.Enabled     := False;
+ TEhf.Enabled     := False;
  end;
 
  3: begin
@@ -1338,6 +1341,7 @@ begin
  Skrivut1.Enabled := False;
  TVis.Enabled     := False;
  Vis2.Enabled     := False;
+ TEhf.Enabled     := False;
  end;
 
  4: begin
@@ -1347,6 +1351,7 @@ begin
  Skrivut1.Enabled := False;
  TVis.Enabled     := False;
  Vis2.Enabled     := False;
+ TEhf.Enabled     := False;
  end;
 
  5: begin
@@ -1366,11 +1371,13 @@ begin
  Slett1.Enabled   := False;
  TEndre.Enabled   := False;
  Endre1.Enabled   := False;
+ TEhf.Enabled     := False;
  end;
 
  6: begin
  TLagre.Enabled           := True;
  Lagre1.Enabled           := True;
+ TEhf.Enabled     := False;
  end;
 
  7: begin
@@ -1378,6 +1385,7 @@ begin
  Skrivut1.Enabled := False;
  TVis.Enabled     := False;
  Vis2.Enabled     := False;
+ TEhf.Enabled     := False;
  end;
 
  8: begin
@@ -1391,6 +1399,7 @@ begin
  Endre1.Enabled     := False;
  TVis.Enabled       := False;
  Vis2.Enabled       := False;
+ TEhf.Enabled     := False;
  end;
  end;
 end;
@@ -1627,6 +1636,21 @@ var
 begin
   if not Dm.KundeDB.Locate('IdKunde', Dm.FakturaDBKundeID.Value, []) then Exit;
 
+  if (Dm.FirmaDBBankkontonr.Value = '') or (Dm.FirmaDBOrganisasjonsnr.Value = '') then begin
+    ShowMessage('Org.nr og Bankkontonr må være spesifisert under fanen "Firmainfo"');
+    Exit;
+  end;
+
+  if Dm.KundeDBOrganisasjonsnr.Value = '' then begin
+    ShowMessage('Org.nr må være spesifisert på kunden for at fakturaen kan sendes i EHF format.');
+    Exit;
+  end;
+
+  if (Dm.FakturaDBVRef.Value = '') or (Dm.FakturaDBDRef.Value = '') then begin
+    ShowMessage('Både "Vår ref." og "Deres ref." må være angitt på faktura for å kunne sendes i EHF format.');
+    Exit;
+  end;
+
   xDoc := EHFInvoiceExport;
 
   SetInvoiceHeader(Dm.FakturaDBFakturanr.AsString,
@@ -1670,10 +1694,11 @@ begin
                  Dm.FakturaDBEks.Value,
                  Dm.FakturaDBMVA.Value,
                  Mva);
+  if Dm.FakturaDBAvg.Value > 0 then
+    SetTaxSubTotal('NOK', -1, Dm.FakturaDBAvg.Value, 0, Mva);
 
   SetInvoiceTotals('NOK', Dm.FakturaDBEks.Value, Dm.FakturaDBTotal.Value,
                    xDoc.DocumentElement);
-
 
   I := 1;
   Dm.FOrdreDB.First;
@@ -1714,6 +1739,7 @@ begin
 
   //Lagrer en kopi av alle exporterte fakturaer
   xDoc.SaveToFile(Dir + 'EHF\' + 'Invoice-' + Dm.FakturaDBFakturanr.AsString + '.xml');
+  ShowMessage('Faktura ' + Dm.FakturaDBFakturanr.AsString + ' ble eksportert til EHF format.');
 end;
 
 end.

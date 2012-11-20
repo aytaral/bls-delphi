@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, DBCtrls, ExtCtrls, ComCtrls, ToolWin, Grids, DBGrids, Mask,
-  Buttons;
+  Buttons, IniFiles;
 
 type
   TFakturaFrm = class(TForm)
@@ -74,6 +74,7 @@ type
     procedure Registrer;
     procedure Blank;
     procedure FakturaSum;
+    procedure SetFakturaRef;
   public
     { Public declarations }
     procedure EndreFaktura;
@@ -84,7 +85,7 @@ var
 
 implementation
 
-uses DataModul, FrmVelg, FrmVOrdre;
+uses DataModul, FrmVelg, FrmVOrdre, blsFileUtil;
 
 {$R *.DFM}
 
@@ -111,9 +112,30 @@ begin
    DBadr.font.color := clblack;
    DBpostnr.font.color := clblack;
    DBpoststed.font.color := clblack;
+
+   SetFakturaRef;
  end;
  VelgFrm.Free;
 end;
+
+procedure TFakturaFrm.SetFakturaRef;
+var
+  Ini: TIniFile;
+begin
+  Ini := TIniFile.Create(Dir + 'RVT.ini');
+  try
+    drefedit.Text := Ini.ReadString('KundeRef', Knredit.Text, '');
+    if drefEdit.Text = '' then
+      drefEdit.Text := Ini.ReadString('KundeRef', 'Default', '');
+
+    vrefedit.Text := Ini.ReadString('FirmaRef', Knredit.Text, '');
+    if vrefEdit.Text = '' then
+      vrefEdit.Text := Ini.ReadString('FirmaRef', 'Default', '');
+  finally
+    Ini.Free;
+  end;
+end;
+
 
 procedure TFakturaFrm.FormActivate(Sender: TObject);
 begin
