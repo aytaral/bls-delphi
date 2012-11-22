@@ -1637,17 +1637,17 @@ begin
   if not Dm.KundeDB.Locate('IdKunde', Dm.FakturaDBKundeID.Value, []) then Exit;
 
   if (Dm.FirmaDBBankkontonr.Value = '') or (Dm.FirmaDBOrganisasjonsnr.Value = '') then begin
-    ShowMessage('Org.nr og Bankkontonr må være spesifisert under fanen "Firmainfo"');
+    MessageBox(Handle, 'Org.nr og Bankkontonr må være spesifisert under fanen "Firmainfo"', 'Info', MB_ICONINFORMATION + MB_OK);
     Exit;
   end;
 
   if Dm.KundeDBOrganisasjonsnr.Value = '' then begin
-    ShowMessage('Org.nr må være spesifisert på kunden for at fakturaen kan sendes i EHF format.');
+    MessageBox(Handle, 'Org.nr må være spesifisert på kunden for at fakturaen kan sendes som EHF', 'Info', MB_ICONINFORMATION + MB_OK);
     Exit;
   end;
 
   if (Dm.FakturaDBVRef.Value = '') or (Dm.FakturaDBDRef.Value = '') then begin
-    ShowMessage('Både "Vår ref." og "Deres ref." må være angitt på faktura for å kunne sendes i EHF format.');
+    MessageBox(Handle, 'Både "Vår ref." og "Deres ref." må være angitt på faktura for å kunne sendes som EHF', 'Info', MB_ICONINFORMATION + MB_OK);
     Exit;
   end;
 
@@ -1739,7 +1739,13 @@ begin
 
   //Lagrer en kopi av alle exporterte fakturaer
   xDoc.SaveToFile(Dir + 'EHF\' + 'Invoice-' + Dm.FakturaDBFakturanr.AsString + '.xml');
-  ShowMessage('Faktura ' + Dm.FakturaDBFakturanr.AsString + ' ble eksportert til EHF format.');
+
+  DM.FakturaDB.Edit;
+  DM.FakturaDBStatus.Value := 'Utskrevet';
+  DM.FakturaDB.Post;
+
+  MessageBox(Handle, PAnsiChar('Faktura ' + Dm.FakturaDBFakturanr.AsString + ' ble eksportert til EHF'),
+    'Export', MB_ICONINFORMATION + MB_OK);
 end;
 
 end.

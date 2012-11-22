@@ -33,8 +33,7 @@ var
   xDoc: IXMLDocument;
   aNode: IXMLNode;
 begin
-  xDoc := blsXMLUtil.CreateXMLDocument('Invoice', 'UTF-8');
-//  xDoc.DOMDocument.appendChild(xDoc.DOMDocument.createProcessingInstruction('xml-stylesheet', 'type="text/xsl" href="EHF-faktura_NO.xslt"'));
+  xDoc := blsXMLUtil.CreateXMLDocument('Invoice', 'UTF-8', 'EHF-faktura_NO.xslt');
 
   xDoc.DocumentElement.Attributes['xsi:schemaLocation'] := 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2 UBL-Invoice-2.0.xsd';
   xDoc.DocumentElement.DeclareNamespace('', 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2');
@@ -249,7 +248,7 @@ begin
   aNode.Attributes['currencyID'] := Currency;
   aNode.NodeValue := FormatFloat('0.00', SumEx);
 
-  aNode := tNode.AddChild('cbc:TaxTaxInclusiveAmount');
+  aNode := tNode.AddChild('cbc:TaxInclusiveAmount');
   aNode.Attributes['currencyID'] := Currency;
   aNode.NodeValue := FormatFloat('0.00', SumInc);
 
