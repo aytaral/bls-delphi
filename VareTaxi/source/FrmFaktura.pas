@@ -261,6 +261,7 @@ If knredit.Text <> '' then begin
    DBadr.font.color := clblack;
    DBpostnr.font.color := clblack;
    DBpoststed.font.color := clblack;
+   SetFakturaRef;
    end
    else begin
    MessageDlg('Kundenummret finnes ikke!', mtError, [mbok], 0);

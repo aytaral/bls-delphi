@@ -124,70 +124,70 @@
 #define QR3Const_SqrPaperSize14 65005
 #define QR3Const_SqrPaperSize15 65006
 #define QR3Const_SqrPaperSize16 65007
-#define XMLConst_SDOMNotSupported 65008
-#define XMLConst_SNodeExpected 65009
-#define XMLConst_SMSDOMNotInstalled 65010
-#define XMLConst_SNotActive 65011
-#define XMLConst_SNodeNotFound 65012
-#define XMLConst_SMissingNode 65013
-#define XMLConst_SNoAttributes 65014
-#define XMLConst_SInvalidNodeType 65015
-#define XMLConst_SMismatchedRegItems 65016
-#define XMLConst_SNotSingleTextNode 65017
-#define XMLConst_SNoDOMParseOptions 65018
-#define XMLConst_SNodeReadOnly 65019
-#define XMLConst_SNoRefresh 65020
-#define XMLConst_SMissingFileName 65021
-#define XMLConst_SLine 65022
+#define JclResources_RsIntelCacheDescr7A 65008
+#define JclResources_RsIntelCacheDescr7B 65009
+#define JclResources_RsIntelCacheDescr7C 65010
+#define JclResources_RsIntelCacheDescr7D 65011
+#define JclResources_RsIntelCacheDescr7F 65012
+#define JclResources_RsIntelCacheDescr82 65013
+#define JclResources_RsIntelCacheDescr83 65014
+#define JclResources_RsIntelCacheDescr84 65015
+#define JclResources_RsIntelCacheDescr85 65016
+#define JclResources_RsIntelCacheDescr86 65017
+#define JclResources_RsIntelCacheDescr87 65018
+#define JclResources_RsIntelCacheDescrB0 65019
+#define JclResources_RsIntelCacheDescrB3 65020
+#define JclResources_RsIntelCacheDescrF0 65021
+#define JclResources_RsIntelCacheDescrF1 65022
 #define QR3Const_SqrPaperSize0 65023
-#define JclResources_RsIntelCacheDescr7C 65024
-#define JclResources_RsIntelCacheDescr7D 65025
-#define JclResources_RsIntelCacheDescr7F 65026
-#define JclResources_RsIntelCacheDescr82 65027
-#define JclResources_RsIntelCacheDescr83 65028
-#define JclResources_RsIntelCacheDescr84 65029
-#define JclResources_RsIntelCacheDescr85 65030
-#define JclResources_RsIntelCacheDescr86 65031
-#define JclResources_RsIntelCacheDescr87 65032
-#define JclResources_RsIntelCacheDescrB0 65033
-#define JclResources_RsIntelCacheDescrB3 65034
-#define JclResources_RsIntelCacheDescrF0 65035
-#define JclResources_RsIntelCacheDescrF1 65036
-#define XMLConst_SDuplicateRegistration 65037
-#define XMLConst_SNoMatchingDOMVendor 65038
-#define XMLConst_SNoDOMNodeEx 65039
-#define JclResources_RsIntelCacheDescr51 65040
-#define JclResources_RsIntelCacheDescr52 65041
-#define JclResources_RsIntelCacheDescr5B 65042
-#define JclResources_RsIntelCacheDescr5C 65043
-#define JclResources_RsIntelCacheDescr5D 65044
-#define JclResources_RsIntelCacheDescr60 65045
-#define JclResources_RsIntelCacheDescr66 65046
-#define JclResources_RsIntelCacheDescr67 65047
-#define JclResources_RsIntelCacheDescr68 65048
-#define JclResources_RsIntelCacheDescr70 65049
-#define JclResources_RsIntelCacheDescr71 65050
-#define JclResources_RsIntelCacheDescr72 65051
-#define JclResources_RsIntelCacheDescr78 65052
-#define JclResources_RsIntelCacheDescr79 65053
-#define JclResources_RsIntelCacheDescr7A 65054
-#define JclResources_RsIntelCacheDescr7B 65055
-#define JclResources_RsIntelCacheDescr08 65056
-#define JclResources_RsIntelCacheDescr0A 65057
-#define JclResources_RsIntelCacheDescr0C 65058
-#define JclResources_RsIntelCacheDescr22 65059
-#define JclResources_RsIntelCacheDescr23 65060
-#define JclResources_RsIntelCacheDescr25 65061
-#define JclResources_RsIntelCacheDescr29 65062
-#define JclResources_RsIntelCacheDescr2C 65063
-#define JclResources_RsIntelCacheDescr30 65064
-#define JclResources_RsIntelCacheDescr40 65065
-#define JclResources_RsIntelCacheDescr41 65066
-#define JclResources_RsIntelCacheDescr42 65067
-#define JclResources_RsIntelCacheDescr43 65068
-#define JclResources_RsIntelCacheDescr44 65069
-#define JclResources_RsIntelCacheDescr45 65070
-#define JclResources_RsIntelCacheDescr50 65071
+#define JclResources_RsIntelCacheDescr45 65024
+#define JclResources_RsIntelCacheDescr50 65025
+#define JclResources_RsIntelCacheDescr51 65026
+#define JclResources_RsIntelCacheDescr52 65027
+#define JclResources_RsIntelCacheDescr5B 65028
+#define JclResources_RsIntelCacheDescr5C 65029
+#define JclResources_RsIntelCacheDescr5D 65030
+#define JclResources_RsIntelCacheDescr60 65031
+#define JclResources_RsIntelCacheDescr66 65032
+#define JclResources_RsIntelCacheDescr67 65033
+#define JclResources_RsIntelCacheDescr68 65034
+#define JclResources_RsIntelCacheDescr70 65035
+#define JclResources_RsIntelCacheDescr71 65036
+#define JclResources_RsIntelCacheDescr72 65037
+#define JclResources_RsIntelCacheDescr78 65038
+#define JclResources_RsIntelCacheDescr79 65039
+#define JclResources_RsIntelCacheDescr04 65040
+#define JclResources_RsIntelCacheDescr06 65041
+#define JclResources_RsIntelCacheDescr08 65042
+#define JclResources_RsIntelCacheDescr0A 65043
+#define JclResources_RsIntelCacheDescr0C 65044
+#define JclResources_RsIntelCacheDescr22 65045
+#define JclResources_RsIntelCacheDescr23 65046
+#define JclResources_RsIntelCacheDescr25 65047
+#define JclResources_RsIntelCacheDescr29 65048
+#define JclResources_RsIntelCacheDescr2C 65049
+#define JclResources_RsIntelCacheDescr30 65050
+#define JclResources_RsIntelCacheDescr40 65051
+#define JclResources_RsIntelCacheDescr41 65052
+#define JclResources_RsIntelCacheDescr42 65053
+#define JclResources_RsIntelCacheDescr43 65054
+#define JclResources_RsIntelCacheDescr44 65055
+#define XMLConst_SNodeNotFound 65056
+#define XMLConst_SMissingNode 65057
+#define XMLConst_SNoAttributes 65058
+#define XMLConst_SInvalidNodeType 65059
+#define XMLConst_SMismatchedRegItems 65060
+#define XMLConst_SNotSingleTextNode 65061
+#define XMLConst_SNoDOMParseOptions 65062
+#define XMLConst_SNodeReadOnly 65063
+#define XMLConst_SNoRefresh 65064
+#define XMLConst_SMissingFileName 65065
+#define XMLConst_SLine 65066
+#define JclResources_RsCannotCreateDir 65067
+#define JclResources_RsIntelCacheDescr00 65068
+#define JclResources_RsIntelCacheDescr01 65069
+#define JclResources_RsIntelCacheDescr02 65070
+#define JclResources_RsIntelCacheDescr03 65071
 #define bdeconst_SBDEError 65072
 #define bdeconst_SIndexDoesNotExist 65073
 #define bdeconst_SNoTableName 65074
@@ -197,13 +197,13 @@
 #define bdeconst_SNoFieldAccess 65078
 #define bdeconst_SUntitled 65079
 #define bdeconst_SLocalTransDirty 65080
-#define JclResources_RsCannotCreateDir 65081
-#define JclResources_RsIntelCacheDescr00 65082
-#define JclResources_RsIntelCacheDescr01 65083
-#define JclResources_RsIntelCacheDescr02 65084
-#define JclResources_RsIntelCacheDescr03 65085
-#define JclResources_RsIntelCacheDescr04 65086
-#define JclResources_RsIntelCacheDescr06 65087
+#define XMLConst_SDuplicateRegistration 65081
+#define XMLConst_SNoMatchingDOMVendor 65082
+#define XMLConst_SNoDOMNodeEx 65083
+#define XMLConst_SDOMNotSupported 65084
+#define XMLConst_SNodeExpected 65085
+#define XMLConst_SMSDOMNotInstalled 65086
+#define XMLConst_SNotActive 65087
 #define bdeconst_SDuplicateDatabaseName 65088
 #define bdeconst_SDuplicateSessionName 65089
 #define bdeconst_SInvalidSessionName 65090
@@ -770,22 +770,8 @@ BEGIN
 	QR3Const_SqrPaperSize14,	"Folio 8 1/2 x 13 in"
 	QR3Const_SqrPaperSize15,	"Quarto 215 x 275 mm"
 	QR3Const_SqrPaperSize16,	"10x14 in"
-	XMLConst_SDOMNotSupported,	"Property or Method \"%s\" is not supported by DOM Vendor \"%s\""
-	XMLConst_SNodeExpected,	"Node cannot be null"
-	XMLConst_SMSDOMNotInstalled,	"Microsoft MSXML is not installed"
-	XMLConst_SNotActive,	"No active document"
-	XMLConst_SNodeNotFound,	"Node \"%s\" not found"
-	XMLConst_SMissingNode,	"IDOMNode required"
-	XMLConst_SNoAttributes,	"Attributes are not supported on this node type"
-	XMLConst_SInvalidNodeType,	"Invalid node type"
-	XMLConst_SMismatchedRegItems,	"Mismatched paramaters to RegisterChildNodes"
-	XMLConst_SNotSingleTextNode,	"Element does not contain a single text node"
-	XMLConst_SNoDOMParseOptions,	"DOM Implementation does not support IDOMParseOptions"
-	XMLConst_SNodeReadOnly,	"Node is readonly"
-	XMLConst_SNoRefresh,	"Refresh is only supported if the FileName or XML properties are set"
-	XMLConst_SMissingFileName,	"FileName cannot be blank"
-	XMLConst_SLine,	"Line"
-	QR3Const_SqrPaperSize0,	"Default size"
+	JclResources_RsIntelCacheDescr7A,	"2° Level cache, 256 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
+	JclResources_RsIntelCacheDescr7B,	"2° Level cache, 512 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
 	JclResources_RsIntelCacheDescr7C,	"2° Level cache, 1 MBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
 	JclResources_RsIntelCacheDescr7D,	"2° Level cache, 2 MByte, 8-way set associative, 64byte line size"
 	JclResources_RsIntelCacheDescr7F,	"2° Level cache, 512 KByte, 2-way set associative, 64-byte line size"
@@ -799,9 +785,9 @@ BEGIN
 	JclResources_RsIntelCacheDescrB3,	"Data TLB, 4 KByte Pages, 4-way set associative, 128 entries"
 	JclResources_RsIntelCacheDescrF0,	"64-Byte Prefetching"
 	JclResources_RsIntelCacheDescrF1,	"128-Byte Prefetching"
-	XMLConst_SDuplicateRegistration,	"\"%s\" DOMImplementation already registered"
-	XMLConst_SNoMatchingDOMVendor,	"No matching DOM Vendor: \"%s\""
-	XMLConst_SNoDOMNodeEx,	"Selected DOM Vendor does not support this property or method"
+	QR3Const_SqrPaperSize0,	"Default size"
+	JclResources_RsIntelCacheDescr45,	"Unified cache, 32 byte cache line, 4-way set associative, 2Mb"
+	JclResources_RsIntelCacheDescr50,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 64 Entries"
 	JclResources_RsIntelCacheDescr51,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 128 Entries"
 	JclResources_RsIntelCacheDescr52,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 256 Entries"
 	JclResources_RsIntelCacheDescr5B,	"Data TLB, 4 KBytes and 4 MBytes pages, 64 Entries"
@@ -816,8 +802,8 @@ BEGIN
 	JclResources_RsIntelCacheDescr72,	"Trace cache, 32 KµOps, 8-way set associative"
 	JclResources_RsIntelCacheDescr78,	"2° Level cache, 1 MBytes, 4-way set associative, 64 Bytes line size"
 	JclResources_RsIntelCacheDescr79,	"2° Level cache, 128 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
-	JclResources_RsIntelCacheDescr7A,	"2° Level cache, 256 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
-	JclResources_RsIntelCacheDescr7B,	"2° Level cache, 512 KBytes, 8-way set associative, dual-sectored line, 64 Bytes sector size"
+	JclResources_RsIntelCacheDescr04,	"Data TLB, 4Mb pages, 4-way set associative, 8 entries"
+	JclResources_RsIntelCacheDescr06,	"8KB instruction cache, 4-way set associative, 32 byte line size"
 	JclResources_RsIntelCacheDescr08,	"16KB instruction cache, 4-way set associative, 32 byte line size"
 	JclResources_RsIntelCacheDescr0A,	"8KB data cache 2-way set associative, 32 byte line size"
 	JclResources_RsIntelCacheDescr0C,	"16KB data cache, 4-way set associative, 32 byte line size"
@@ -832,8 +818,22 @@ BEGIN
 	JclResources_RsIntelCacheDescr42,	"Unified cache, 32 byte cache line, 4-way set associative, 256Kb"
 	JclResources_RsIntelCacheDescr43,	"Unified cache, 32 byte cache line, 4-way set associative, 512Kb"
 	JclResources_RsIntelCacheDescr44,	"Unified cache, 32 byte cache line, 4-way set associative, 1Mb"
-	JclResources_RsIntelCacheDescr45,	"Unified cache, 32 byte cache line, 4-way set associative, 2Mb"
-	JclResources_RsIntelCacheDescr50,	"Instruction TLB, 4 KBytes and 2 MBytes or 4 MBytes pages, 64 Entries"
+	XMLConst_SNodeNotFound,	"Node \"%s\" not found"
+	XMLConst_SMissingNode,	"IDOMNode required"
+	XMLConst_SNoAttributes,	"Attributes are not supported on this node type"
+	XMLConst_SInvalidNodeType,	"Invalid node type"
+	XMLConst_SMismatchedRegItems,	"Mismatched paramaters to RegisterChildNodes"
+	XMLConst_SNotSingleTextNode,	"Element does not contain a single text node"
+	XMLConst_SNoDOMParseOptions,	"DOM Implementation does not support IDOMParseOptions"
+	XMLConst_SNodeReadOnly,	"Node is readonly"
+	XMLConst_SNoRefresh,	"Refresh is only supported if the FileName or XML properties are set"
+	XMLConst_SMissingFileName,	"FileName cannot be blank"
+	XMLConst_SLine,	"Line"
+	JclResources_RsCannotCreateDir,	"Unable to create directory"
+	JclResources_RsIntelCacheDescr00,	"Null descriptor"
+	JclResources_RsIntelCacheDescr01,	"Instruction TLB, 4Kb pages, 4-way set associative, 32 entries"
+	JclResources_RsIntelCacheDescr02,	"Instruction TLB, 4Mb pages, fully associative, 2 entries"
+	JclResources_RsIntelCacheDescr03,	"Data TLB, 4Kb pages, 4-way set associative, 64 entries"
 	bdeconst_SBDEError,	"BDE error $%.4x"
 	bdeconst_SIndexDoesNotExist,	"Index does not exist. Index: %s"
 	bdeconst_SNoTableName,	"Missing TableName property"
@@ -843,13 +843,13 @@ BEGIN
 	bdeconst_SNoFieldAccess,	"Cannot access field '%s' in a filter"
 	bdeconst_SUntitled,	"Untitled Application"
 	bdeconst_SLocalTransDirty,	"The transaction isolation level must be dirty read for local databases"
-	JclResources_RsCannotCreateDir,	"Unable to create directory"
-	JclResources_RsIntelCacheDescr00,	"Null descriptor"
-	JclResources_RsIntelCacheDescr01,	"Instruction TLB, 4Kb pages, 4-way set associative, 32 entries"
-	JclResources_RsIntelCacheDescr02,	"Instruction TLB, 4Mb pages, fully associative, 2 entries"
-	JclResources_RsIntelCacheDescr03,	"Data TLB, 4Kb pages, 4-way set associative, 64 entries"
-	JclResources_RsIntelCacheDescr04,	"Data TLB, 4Mb pages, 4-way set associative, 8 entries"
-	JclResources_RsIntelCacheDescr06,	"8KB instruction cache, 4-way set associative, 32 byte line size"
+	XMLConst_SDuplicateRegistration,	"\"%s\" DOMImplementation already registered"
+	XMLConst_SNoMatchingDOMVendor,	"No matching DOM Vendor: \"%s\""
+	XMLConst_SNoDOMNodeEx,	"Selected DOM Vendor does not support this property or method"
+	XMLConst_SDOMNotSupported,	"Property or Method \"%s\" is not supported by DOM Vendor \"%s\""
+	XMLConst_SNodeExpected,	"Node cannot be null"
+	XMLConst_SMSDOMNotInstalled,	"Microsoft MSXML is not installed"
+	XMLConst_SNotActive,	"No active document"
 	bdeconst_SDuplicateDatabaseName,	"Duplicate database name '%s'"
 	bdeconst_SDuplicateSessionName,	"Duplicate session name '%s'"
 	bdeconst_SInvalidSessionName,	"Invalid session name %s"

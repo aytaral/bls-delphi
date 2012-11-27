@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ComCtrls, ToolWin, Menus, ExtCtrls, StdCtrls, DBCtrls, Grids,
   DBGrids, ShellApi, Buttons, Spin, OleCtrls, vcfi, DB, ExtDlgs, Registry,
-  DBTables, Printers,
+  DBTables, Printers, JclIniFiles,
   blsDbGridScroll, blsXMLUtil, vtEHFExport, XMLIntf, XmlDoc, IniFiles;
 
 type
@@ -389,7 +389,7 @@ implementation
 uses  DataModul, FrmPost, FrmKunde, FrmFLogo, FrmBil,
   FrmOrdre, FrmSjofor, FrmRpt, FrmFaktura, RptFaktura,
   RptPurre, FrmAvtaleWzd, FrmBestilling, RptBestilling, FrmPassord,
-  FrmLogin, vtPrint, blsFileUtil, vtFastAvtale;
+  FrmLogin, vtPrint, blsFileUtil, vtFastAvtale, blsString;
   
 {$R *.DFM}
 
@@ -1633,6 +1633,7 @@ var
   xDoc: IXMLDocument;
   Mva: IXMLNode;
   I: Integer;
+  S, Adr, Postnr, Poststed: String;
 begin
   if not Dm.KundeDB.Locate('IdKunde', Dm.FakturaDBKundeID.Value, []) then Exit;
 
@@ -1677,11 +1678,22 @@ begin
                   Dm.FakturaDBDRef.AsString,
                   xDoc.DocumentElement);
 
-  SetDeliveryInfo(Dm.FakturaDBFakturaDato.Value,
-                  Dm.KundeDBAdresse.AsString,
-                  Dm.KundeDBPoststed.AsString,
-                  Dm.KundeDBPostnr.AsString,
-                  'NO',
+  S := JclIniFiles.IniReadString(Dir + 'Rvt.ini', 'KundeLevAdresse', Dm.KundeDBKundenr.AsString);
+  if S <> '' then begin
+    Adr := blsString.Splitt(S, 1, ',');
+    S := Trim(blsString.Splitt(S, 2, ','));
+
+    Postnr := blsString.Splitt(S, 1, ' ');
+    Poststed := blsString.Splitt(S, 2, ' ');
+  end
+  else begin
+    Adr := Dm.KundeDBAdresse.AsString;
+    Poststed := Dm.KundeDBPoststed.AsString;
+    Postnr := Dm.KundeDBPostnr.AsString;
+  end;
+
+
+  SetDeliveryInfo(Dm.FakturaDBFakturaDato.Value, Adr, Poststed, Postnr, 'NO',
                   xDoc.DocumentElement);
 
   SetPaymentInfo(Dm.FakturaDBForfallsDato.Value,
