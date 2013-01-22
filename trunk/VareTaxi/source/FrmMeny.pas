@@ -181,7 +181,6 @@ type
     ToolButton3: TToolButton;
     TKalk: TToolButton;
     TKopi: TToolButton;
-    TService: TToolButton;
     Ordrepanel: TPanel;
     Label7: TLabel;
     Label50: TLabel;
