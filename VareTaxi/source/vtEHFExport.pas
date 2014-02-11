@@ -76,6 +76,19 @@ begin
     blsXMLUtil.SetNodeValue('cac:ContractDocumentReference\cbc:ID', ContractNo, Root, False);
 end;
 
+procedure SetTaxScheme(IncludeScheme: Boolean; var Root: IXMLNode);
+var
+  aNode: IXMLNode;
+begin
+  aNode := Root.AddChild('cac:TaxScheme');
+  aNode := aNode.AddChild('cbc:ID');
+  if IncludeScheme then begin
+    aNode.Attributes['schemeID'] := 'UN/ECE 5153';
+    aNode.Attributes['schemeAgencyID'] := '6';
+    aNode.NodeValue := 'VAT';
+  end;
+end;
+
 procedure SetCompanyInfo(Name, Postbox, Street, City, PostCode, CountryCode,
   OrgNo, OurRef: String; Root: IXMLNode);
 var
@@ -92,6 +105,8 @@ begin
   tNode := Root.AddChild('cac:AccountingSupplierParty');
   tNode := tNode.AddChild('cac:Party');
 
+  if CountryCode = 'NO' then
+    blsXMLUtil.SetNodeValue('cbc:EndpointID', '9908:' + CompNo, tNode, False);
   blsXMLUtil.SetNodeValue('cac:PartyName\cbc:Name', Name, tNode, False);
 
   aNode := tNode.AddChild('cac:PostalAddress');
@@ -105,13 +120,7 @@ begin
 
   aNode := tNode.AddChild('cac:PartyTaxScheme');
   blsXMLUtil.SetNodeValue('cbc:CompanyID', FullOrgNo, aNode, False);
-
-  //Hardkodet TAX-Scheme tagger
-  aNode := aNode.AddChild('cac:TaxScheme');
-  aNode := aNode.AddChild('cbc:ID');
-  aNode.Attributes['schemeID'] := 'UN/ECE 5153';
-  aNode.Attributes['schemeAgencyID'] := '6';
-  aNode.NodeValue := 'VAT';
+  SetTaxScheme(True, aNode);
 
   blsXMLUtil.SetNodeValue('cac:PartyLegalEntity\cbc:CompanyID', CompNo, tNode, False);
   blsXMLUtil.SetNodeValue('cac:Contact\cbc:ID', OurRef, tNode, False);
@@ -123,8 +132,18 @@ var
   aNode, tNode: IXMLNode;
   CompNo: String;
 begin
+  //Fjerner uønskede elementer fra org no.
+  CompNo := AnsiUpperCase(OrgNo);
+  CompNo := StringReplace(CompNo, '.', '', [rfReplaceAll]);
+  CompNo := StringReplace(CompNo, ' ', '', [rfReplaceAll]);
+  CompNo := StringReplace(CompNo, 'NO', '', []);
+  CompNo := StringReplace(CompNo, 'MVA', '', []);
+
   tNode := Root.AddChild('cac:AccountingCustomerParty');
   tNode := tNode.AddChild('cac:Party');
+
+  if CountryCode = 'NO' then
+    blsXMLUtil.SetNodeValue('cbc:EndpointID', '9908:' + CompNo, tNode, False);
 
   blsXMLUtil.SetNodeValue('cac:PartyIdentification\cbc:ID', Id, tNode, False);
   blsXMLUtil.SetNodeValue('cac:PartyName\cbc:Name', Name, tNode, False);
@@ -135,13 +154,6 @@ begin
   blsXMLUtil.SetNodeValue('cbc:CityName', City, aNode, False);
   blsXMLUtil.SetNodeValue('cbc:PostalZone', PostCode, aNode, False);
   blsXMLUtil.SetNodeValue('cac:Country\cbc:IdentificationCode', CountryCode, aNode, False);
-
-  //Fjerner uønskede elementer fra org no.
-  CompNo := AnsiUpperCase(OrgNo);
-  CompNo := StringReplace(CompNo, '.', '', [rfReplaceAll]);
-  CompNo := StringReplace(CompNo, ' ', '', [rfReplaceAll]);
-  CompNo := StringReplace(CompNo, 'NO', '', []);
-  CompNo := StringReplace(CompNo, 'MVA', '', []);
 
   blsXMLUtil.SetNodeValue('cac:PartyLegalEntity\cbc:CompanyID', CompNo, tNode, False);
   blsXMLUtil.SetNodeValue('cac:Contact\cbc:ID', YourRef, tNode, False);
@@ -159,7 +171,6 @@ begin
   tNode := tNode.AddChild('cac:Address');
 
   blsXMLUtil.SetNodeValue('cbc:StreetName', Street, tNode, False);
-  //blsXMLUtil.SetNodeValue('cbc:BuildingNumber', '', aNode, False);
   blsXMLUtil.SetNodeValue('cbc:CityName', City, tNode, False);
   blsXMLUtil.SetNodeValue('cbc:PostalZone', PostCode, tNode, False);
   blsXMLUtil.SetNodeValue('cac:Country\cbc:IdentificationCode', CountryCode, tNode, False);
@@ -222,12 +233,15 @@ begin
   aNode.Attributes['currencyID'] := Currency;
   aNode.NodeValue := FormatFloat('0.00', MvaSubTotal);
 
-  DecimalSeparator := OldSep;
-
   aNode := tNode.AddChild('cac:TaxCategory');
   blsXMLUtil.SetNodeValue('cbc:ID', GetTaxCode(MvaPercent), aNode, False);
-  blsXMLUtil.SetNodeValue('cbc:Percent', MvaPercent, aNode, False);
-  blsXMLUtil.SetNodeValue('cac:TaxScheme\cbc:ID', 'VAT', aNode, False);
+  if MvaPercent = -1 then
+    MvaPercent := 0;
+  blsXMLUtil.SetNodeValue('cbc:Percent', FormatFloat('0.00', MvaPercent), aNode, False);
+  SetTaxScheme(True, aNode);
+//  blsXMLUtil.SetNodeValue('cac:TaxScheme\cbc:ID', 'VAT', aNode, False);
+
+  DecimalSeparator := OldSep;
 end;
 
 procedure SetInvoiceTotals(Currency: String; SumEx, SumInc: Double; Root: IXMLNode);
@@ -306,7 +320,9 @@ begin
   aNode.Attributes['currencyID'] := Currency;
   Mva := (Qty * ItemPrice) * MvaPercent;
   if Mva > 0 then
-    Mva := (Mva / 100);
+    Mva := (Mva / 100)
+  else
+    Mva := 0;
   aNode.NodeValue := FormatFloat('0.00', Mva);
 
   //Item details
@@ -316,8 +332,11 @@ begin
     blsXMLUtil.SetNodeValue('cac:SellersItemIdentification\cbc:ID', ItemNo, aNode, False);
   aNode := aNode.AddChild('cac:ClassifiedTaxCategory');
   blsXMLUtil.SetNodeValue('cbc:ID', GetTaxCode(MvaPercent), aNode, False);
+  if MvaPercent = -1 then
+    MvaPercent := 0;
   blsXMLUtil.SetNodeValue('cbc:Percent', FormatFloat('0.00', MvaPercent), aNode, False);
-  blsXMLUtil.SetNodeValue('cac:TaxScheme\cbc:ID', 'VAT', aNode, False);
+  SetTaxScheme(True, aNode);
+//  blsXMLUtil.SetNodeValue('cac:TaxScheme\cbc:ID', 'VAT', aNode, False);
 
   //Price
   aNode := tNode.AddChild('cac:Price');
