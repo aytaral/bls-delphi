@@ -1646,10 +1646,11 @@ begin
     Exit;
   end;
 
-  if (Dm.FakturaDBVRef.Value = '') or (Dm.FakturaDBDRef.Value = '') then begin
+{  if (Dm.FakturaDBVRef.Value = '') or (Dm.FakturaDBDRef.Value = '') then begin
     MessageBox(Handle, 'Både "Vår ref." og "Deres ref." må være angitt på faktura for å kunne sendes som EHF', 'Info', MB_ICONINFORMATION + MB_OK);
     Exit;
   end;
+}
 
   xDoc := EHFInvoiceExport;
 
@@ -1708,7 +1709,7 @@ begin
   if Dm.FakturaDBAvg.Value > 0 then
     SetTaxSubTotal('NOK', -1, Dm.FakturaDBAvg.Value, 0, Mva);
 
-  SetInvoiceTotals('NOK', Dm.FakturaDBEks.Value, Dm.FakturaDBTotal.Value,
+  SetInvoiceTotals('NOK', Dm.FakturaDBEks.Value + Dm.FakturaDBAvg.Value, Dm.FakturaDBTotal.Value,
                    xDoc.DocumentElement);
 
   I := 1;
