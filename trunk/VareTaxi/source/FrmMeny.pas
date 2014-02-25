@@ -290,6 +290,8 @@ type
     popGrid: TPopupMenu;
     popVisInAktive: TMenuItem;
     TEhf: TToolButton;
+    Label96: TLabel;
+    FakturagebyrEdit: TEdit;
     procedure Om2Click(Sender: TObject);
     procedure Postadresser1Click(Sender: TObject);
     procedure TLagreClick(Sender: TObject);
@@ -420,6 +422,7 @@ begin
  DM.FirmaDBWebadresse.Value        := Webadresseedit.Text;
  DM.FirmaDBOrganisasjonsnr.Value   := Orgedit.Text;
  DM.FirmaDBBankkontonr.Value       := Bankedit.Text;
+ DM.FirmaDBFakturagebyr.Value      := StrToFloat(FakturagebyrEdit.Text);
  DM.FirmaDBStdTekst.Value          := FTekst.Text;
  DM.FirmaDBMva.Value               := StrToFloat(MomsEdit.Text);
  DM.FirmaDB.Post;
@@ -788,6 +791,7 @@ begin
  Orgedit.Text         := DM.FirmaDBOrganisasjonsnr.Value;
  Bankedit.Text        := DM.FirmaDBBankkontonr.Value;
  MomsEdit.Text        := FloatToStrF(DM.FirmaDBMva.Value, ffNumber, 2,2);
+ FakturagebyrEdit.Text := FloatToStrF(DM.FirmaDBFakturagebyr.Value, ffNumber, 2,2);
  FTekst.Text          := DM.FirmaDBStdTekst.Value;
 end;
 
@@ -1635,6 +1639,11 @@ var
   S, Adr, Postnr, Poststed: String;
 begin
   if not Dm.KundeDB.Locate('IdKunde', Dm.FakturaDBKundeID.Value, []) then Exit;
+
+  if FileExists(Dir + 'EHF\' + 'Invoice-' + Dm.FakturaDBFakturanr.AsString + '.xml') then begin
+    if MessageBox(Handle, 'Fakturaen er allerede printet til EHF. Er du sikker på at du vil sende den på nytt?',
+      'Info', MB_ICONQUESTION + MB_YESNO) <> idYes then Exit;
+  end;
 
   if (Dm.FirmaDBBankkontonr.Value = '') or (Dm.FirmaDBOrganisasjonsnr.Value = '') then begin
     MessageBox(Handle, 'Org.nr og Bankkontonr må være spesifisert under fanen "Firmainfo"', 'Info', MB_ICONINFORMATION + MB_OK);

@@ -87,6 +87,8 @@ type
     qrKroner: TQRLabel;
     qrOre: TQRLabel;
     qrKontroll: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRDBText1: TQRDBText;
     procedure FakturaRptBeforePrint(Sender: TCustomQuickRep;
       var PrintReport: Boolean);
     procedure QRBand4BeforePrint(Sender: TQRCustomBand;

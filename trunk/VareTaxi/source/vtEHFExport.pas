@@ -138,7 +138,7 @@ end;
 procedure SetCustomerInfo(Id, Name, Street, City, PostCode, CountryCode, OrgNo,
   YourRef: String; Root: IXMLNode);
 var
-  aNode, tNode: IXMLNode;
+  aNode, tNode, tmpNode: IXMLNode;
   CompNo: String;
 begin
   //Fjerner uønskede elementer fra org no.
@@ -164,7 +164,20 @@ begin
   blsXMLUtil.SetNodeValue('cbc:PostalZone', PostCode, aNode, False);
   blsXMLUtil.SetNodeValue('cac:Country\cbc:IdentificationCode', CountryCode, aNode, False);
 
-  blsXMLUtil.SetNodeValue('cac:PartyLegalEntity\cbc:CompanyID', CompNo, tNode, False);
+  if Pos('MVA', OrgNo) > -1 then begin
+    aNode := tNode.AddChild('cac:PartyTaxScheme');
+    tmpNode := blsXMLUtil.SetNodeValue('cbc:CompanyID', CompNo + 'MVA', aNode, False);
+    SetAttributeValue('', 'schemeID', 'NO:VAT', tmpNode);
+    SetAttributeValue('', 'schemeAgencyID', '82', tmpNode);
+    SetTaxScheme(True, aNode);
+  end;
+
+  aNode := tNode.AddChild('cac:PartyLegalEntity');
+  blsXMLUtil.SetNodeValue('cbc:RegistrationName', Name, aNode, False);
+  tmpNode := blsXMLUtil.SetNodeValue('cbc:CompanyID', CompNo, aNode, False);
+  SetAttributeValue('', 'schemeID', 'NO:ORGNR', tmpNode);
+  SetAttributeValue('', 'schemeAgencyID', '82', tmpNode);
+
   blsXMLUtil.SetNodeValue('cac:Contact\cbc:ID', YourRef, tNode, False);
 end;
 

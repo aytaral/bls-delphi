@@ -299,6 +299,9 @@ type
     FOrdreDBKmPris: TFloatField;
     FOrdreDBTimePris: TFloatField;
     FOrdreDBFastPris: TFloatField;
+    FirmaDBFakturagebyr: TFloatField;
+    KundeDBIkkeFakturagebyr: TBooleanField;
+    FakturaDBFakturagebyr: TCurrencyField;
     procedure FakturaDBCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);

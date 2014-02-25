@@ -54,6 +54,7 @@ type
     DBEdit2: TDBEdit;
     Label7: TLabel;
     cbInaktiv: TCheckBox;
+    cbIkkeFaktuagebyr: TCheckBox;
     procedure OkBtnClick(Sender: TObject);
     procedure NyKundeBitbtnClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -107,6 +108,7 @@ With DM Do
   KundeDBKundeinfo.Value           :=  Kunde_info_memo.Text;
   KundeDBForfallsdager.Value       :=  FDageredit.Value;
   KundeDBInAktiv.Value             :=  cbInaktiv.Checked;
+  KundeDBIkkeFakturagebyr.Value    :=  cbIkkeFaktuagebyr.Checked;
   KundeDB.Post;
  If Not PostDB.Locate('Postnr', post_nr_edit.Text, []) and (Post_nr_edit.Text <> '') then begin
  PostDB.Append;
@@ -149,6 +151,7 @@ begin
   Kunde_info_memo.Text           := KundeDBKundeinfo.Value;
   FDageredit.Value               := KundeDBForfallsdager.Value;
   cbInaktiv.Checked              := KundeDBInAktiv.Value;
+  cbIkkeFaktuagebyr.Checked      := KundeDBIkkeFakturagebyr.Value;
  end;
 end;
 
@@ -169,6 +172,7 @@ begin
  Kunde_info_memo.Text        := '';
  FDageredit.Value            := 15;
  cbInaktiv.Checked           := False;
+ cbIkkeFaktuagebyr.Checked   := False;
 end;
 
 procedure TKundeFrm.FormClose(Sender: TObject; var Action: TCloseAction);

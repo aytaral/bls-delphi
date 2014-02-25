@@ -87,6 +87,8 @@ type
     QRLabel20: TQRLabel;
     QRLabel21: TQRLabel;
     QrdbKid: TQRDBText;
+    QRLabel22: TQRLabel;
+    QRDBText4: TQRDBText;
     procedure PurreRptBeforePrint(Sender: TCustomQuickRep;
       var PrintReport: Boolean);
   private
