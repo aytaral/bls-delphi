@@ -55,6 +55,8 @@ type
     TBNr: TToolButton;
     DatoEdit: TDateTimePicker;
     FDatoEdit: TDateTimePicker;
+    Label10: TLabel;
+    DBText5: TDBText;
     procedure sbkClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -70,6 +72,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    BrukFakturagebyr: Boolean;
     procedure OpprettDataRad;
     procedure Registrer;
     procedure Blank;
@@ -107,12 +110,12 @@ begin
  If VelgFrm.ShowModal = mrOK then begin
    Knredit.Text          := FloatToStr(DM.KundeDBKundenr.Value);
    FDatoEdit.Date        := DatoEdit.Date + DM.KundeDBForfallsdager.Value;
+   BrukFakturagebyr      := (Dm.KundeDBIkkeFakturagebyr.Value = False); 
    VelgFrm.Kunde.Visible := False;
    DBfirma.font.color := clblack;
    DBadr.font.color := clblack;
    DBpostnr.font.color := clblack;
    DBpoststed.font.color := clblack;
-
    SetFakturaRef;
  end;
  VelgFrm.Free;
@@ -122,11 +125,16 @@ procedure TFakturaFrm.SetFakturaRef;
 var
   Ini: TIniFile;
 begin
+  If Status.Caption <> 'Ny' then Exit;
+
   Ini := TIniFile.Create(Dir + 'RVT.ini');
   try
     drefedit.Text := Ini.ReadString('KundeRef', Knredit.Text, '');
     if drefEdit.Text = '' then
       drefEdit.Text := Ini.ReadString('KundeRef', 'Default', '');
+
+    if drefedit.Text = '' then
+      drefEdit.Text := DM.KundeDBKontaktperson.AsString;
 
     vrefedit.Text := Ini.ReadString('FirmaRef', Knredit.Text, '');
     if vrefEdit.Text = '' then
@@ -359,9 +367,11 @@ begin
     EnableControls;
     DM.FakturaDB.Edit;
     DM.FakturaDBEks.Value   := Eks;
+    if BrukFakturagebyr then
+      Dm.FakturaDBFakturagebyr.Value := Dm.FirmaDBFakturagebyr.Value;
     DM.FakturaDBAvg.Value   := Avg;
-    DM.FakturaDBMva.Value   := Eks * (DM.FakturaDBMVASats.Value/100) ;
-    DM.FakturaDBTotal.Value := Eks + Avg + (Eks * (DM.FakturaDBMVASats.Value/100));
+    DM.FakturaDBMva.Value   := (Eks + Dm.FakturaDBFakturagebyr.Value) * (DM.FakturaDBMVASats.Value/100) ;
+    DM.FakturaDBTotal.Value := Eks + Avg + Dm.FakturaDBFakturagebyr.Value + DM.FakturaDBMva.Value;
     DM.FakturaDB.Post;
 //    DM.RundAvTotalSum;
     end;
