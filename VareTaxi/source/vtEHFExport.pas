@@ -18,10 +18,11 @@ procedure SetDeliveryInfo(DelDate: TDateTime; Street, City, PostCode,
 
 procedure SetPaymentInfo(DueDate: TDateTime; KID: String; AccountNo: String;
   Root: IXMLNode);
+procedure SetAllowanceCharge(Desc, Currency: String; Value, MvaPercent: Double; Root: IXMLNode);
 function SetTaxTotalInfo(Currency: String; Mva: Double; Root: IXMLNode): IXMLNode;
 procedure SetTaxSubTotal(Currency: String; MvaPercent,
   SubTotal, MvaSubTotal: Double; TaxNode: IXMLNode);
-procedure SetInvoiceTotals(Currency: String; SumEx, SumInc: Double; Root: IXMLNode);
+procedure SetInvoiceTotals(Currency: String; SumEx, SumCharge, SumInc: Double; Root: IXMLNode);
 
 procedure AddLine(LineNo: Integer; Currency, OrderNo, UnitCode, ItemNo,
   ItemText: String; Qty, ItemPrice, MvaPercent: Double; Root: IXMLNode);
@@ -31,7 +32,6 @@ implementation
 function EHFInvoiceExport(): IXMLDocument;
 var
   xDoc: IXMLDocument;
-  aNode: IXMLNode;
 begin
   xDoc := blsXMLUtil.CreateXMLDocument('Invoice', 'UTF-8', 'EHF-faktura_NO.xslt');
 
@@ -62,8 +62,6 @@ end;
 
 procedure SetInvoiceHeader(InvoiceNo, Currency, OrderNo, ContractNo: String;
   InvoiceDate: TDateTime; Root: IXMLNode);
-var
-  aNode: IXMLNode;
 begin
   blsXMLUtil.SetNodeValue('cbc:ID', InvoiceNo, Root, False);
   blsXMLUtil.SetNodeValue('cbc:IssueDate', FormatDateTime('yyyy-mm-dd', InvoiceDate), Root, False);
@@ -218,6 +216,30 @@ begin
   tNode.NodeValue := ANo;
 end;
 
+procedure SetAllowanceCharge(Desc, Currency: String; Value, MvaPercent: Double; Root: IXMLNode);
+var
+  tNode, tmpNode: IXMLNode;
+  OldSep: Char;
+begin
+  OldSep := DecimalSeparator;
+  DecimalSeparator := '.';
+
+  tNode := Root.AddChild('cac:AllowanceCharge');
+  blsXMLUtil.SetNodeValue('cbc:ChargeIndicator', 'true', tNode, False);
+  blsXMLUtil.SetNodeValue('cbc:AllowanceChargeReason', Desc, tNode, False);
+  tmpNode := blsXMLUtil.SetNodeValue('cbc:Amount', FormatFloat('0.00', Value), tNode, False);
+  tmpNode.Attributes['currencyID'] := Currency;
+
+  tNode := tNode.AddChild('cac:TaxCategory');
+  blsXMLUtil.SetNodeValue('cbc:ID', GetTaxCode(MvaPercent), tNode, False);
+  if MvaPercent = -1 then
+    MvaPercent := 0;
+  blsXMLUtil.SetNodeValue('cbc:Percent', FormatFloat('0.00', MvaPercent), tNode, False);
+  SetTaxScheme(True, tNode);
+
+  DecimalSeparator := OldSep;
+end;
+
 function SetTaxTotalInfo(Currency: String; Mva: Double; Root: IXMLNode): IXMLNode;
 var
   tNode, aNode: IXMLNode;
@@ -266,7 +288,7 @@ begin
   DecimalSeparator := OldSep;
 end;
 
-procedure SetInvoiceTotals(Currency: String; SumEx, SumInc: Double; Root: IXMLNode);
+procedure SetInvoiceTotals(Currency: String; SumEx, SumCharge, SumInc: Double; Root: IXMLNode);
 var
   tNode, aNode: IXMLNode;
   OldSep: Char;
@@ -282,11 +304,15 @@ begin
 
   aNode := tNode.AddChild('cbc:TaxExclusiveAmount');
   aNode.Attributes['currencyID'] := Currency;
-  aNode.NodeValue := FormatFloat('0.00', SumEx);
+  aNode.NodeValue := FormatFloat('0.00', SumEx + SumCharge);
 
   aNode := tNode.AddChild('cbc:TaxInclusiveAmount');
   aNode.Attributes['currencyID'] := Currency;
   aNode.NodeValue := FormatFloat('0.00', SumInc);
+
+  aNode := tNode.AddChild('cbc:ChargeTotalAmount');
+  aNode.Attributes['currencyID'] := Currency;
+  aNode.NodeValue := FormatFloat('0.00', SumCharge);
 
   aNode := tNode.AddChild('cbc:PayableAmount');
   aNode.Attributes['currencyID'] := Currency;

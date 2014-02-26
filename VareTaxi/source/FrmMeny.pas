@@ -1710,16 +1710,20 @@ begin
                  Dm.FirmaDBBankkontonr.AsString,
                  xDoc.DocumentElement);
 
+  if Dm.FakturaDBFakturagebyr.Value > 0 then
+    SetAllowanceCharge('Fakturagebyr', 'NOK', Dm.FakturaDBFakturagebyr.Value,
+      Dm.FakturaDBMVASats.Value, xDoc.DocumentElement);
+
   Mva := SetTaxTotalInfo('NOK', Dm.FakturaDBMVA.Value, xDoc.DocumentElement);
   SetTaxSubTotal('NOK', Dm.FakturaDBMVASats.Value,
-                 Dm.FakturaDBEks.Value,
+                 Dm.FakturaDBEks.Value + Dm.FakturaDBFakturagebyr.Value,
                  Dm.FakturaDBMVA.Value,
                  Mva);
   if Dm.FakturaDBAvg.Value > 0 then
     SetTaxSubTotal('NOK', -1, Dm.FakturaDBAvg.Value, 0, Mva);
 
-  SetInvoiceTotals('NOK', Dm.FakturaDBEks.Value + Dm.FakturaDBAvg.Value, Dm.FakturaDBTotal.Value,
-                   xDoc.DocumentElement);
+  SetInvoiceTotals('NOK', Dm.FakturaDBEks.Value + Dm.FakturaDBAvg.Value,
+    Dm.FakturaDBFakturagebyr.Value, Dm.FakturaDBTotal.Value, xDoc.DocumentElement);
 
   I := 1;
   Dm.FOrdreDB.First;
