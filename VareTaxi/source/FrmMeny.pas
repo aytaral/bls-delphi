@@ -7,7 +7,7 @@ uses
   ComCtrls, ToolWin, Menus, ExtCtrls, StdCtrls, DBCtrls, Grids,
   DBGrids, ShellApi, Buttons, Spin, OleCtrls, vcfi, DB, ExtDlgs, Registry,
   DBTables, Printers, JclIniFiles,
-  blsDbGridScroll, blsXMLUtil, vtEHFExport, XMLIntf, XmlDoc, IniFiles;
+  blsDbGridScroll, blsXMLUtil, vtEHF21_Export, XMLIntf, XmlDoc, IniFiles;
 
 type
   TMenyFrm = class(TForm)

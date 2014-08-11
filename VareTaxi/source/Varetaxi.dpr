@@ -33,7 +33,7 @@ uses
   vtPrint in 'vtPrint.pas' {frmPrint},
   vtFastAvtale in 'vtFastAvtale.pas' {frmFastAvtale},
   vtFastAvtaleSok in 'vtFastAvtaleSok.pas' {frmFastAvtaleSok},
-  vtEHFExport in 'vtEHFExport.pas';
+  vtEHF21_Export in 'vtEHF21_Export.pas';
 
 {$R *.RES}
 
