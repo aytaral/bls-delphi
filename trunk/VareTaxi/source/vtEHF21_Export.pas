@@ -42,8 +42,10 @@ begin
   xDoc.DocumentElement.DeclareNamespace('cbc', 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2');
   xDoc.DocumentElement.DeclareNamespace('ext', 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2');
 
+
+
   SetNodeValue('cbc:UBLVersionID', '2.1', xDoc.DocumentElement, False);
-  SetNodeValue('cbc:CustomizationID', 'urn:www.cenbii.eu:transaction:biicoretrdm010:ver1.0:#urn:www.peppol.eu:bis:peppol4a:ver1.0#urn:www.difi.no:ehf:faktura:ver1', xDoc.DocumentElement, False);
+  SetNodeValue('cbc:CustomizationID', 'urn:www.cenbii.eu:transaction:biitrns010:ver2.0:extended:urn:www.peppol.eu:bis:peppol4a:ver2.0:extended:urn:www.difi.no:ehf:faktura:ver2.0', xDoc.DocumentElement, False);
   SetNodeValue('cbc:ProfileID', 'urn:www.cenbii.eu:profile:bii04:ver2.0', xDoc.DocumentElement, False);
 
   Result := xDoc;
